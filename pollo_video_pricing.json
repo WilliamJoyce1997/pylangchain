@@ -1,0 +1,3908 @@
+{
+  "source": "https://api.pollo.ai/zh/pricing",
+  "read_at": "2026-10-14 11:39:57 UTC+08:00",
+  "verified_rows": 1495,
+  "models": 50,
+  "rows": [
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "std",
+      "length": 1,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.066,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "std",
+      "length": 2,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.132,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "std",
+      "length": 3,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.198,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "std",
+      "length": 4,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.264,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "std",
+      "length": 5,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.33,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "std",
+      "length": 6,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.396,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "std",
+      "length": 7,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.462,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "std",
+      "length": 8,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.528,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "std",
+      "length": 9,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.594,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "std",
+      "length": 10,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.66,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "std",
+      "length": 11,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.726,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "std",
+      "length": 12,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.792,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "std",
+      "length": 13,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.858,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "std",
+      "length": 14,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.924,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "std",
+      "length": 15,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.99,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "std",
+      "length": 16,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 1.056,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "std",
+      "length": 1,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 0.096,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "std",
+      "length": 2,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 0.192,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "std",
+      "length": 3,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 0.288,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "std",
+      "length": 4,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 0.384,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "std",
+      "length": 5,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 0.48,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "std",
+      "length": 6,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 0.576,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "std",
+      "length": 7,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 0.672,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "std",
+      "length": 8,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 0.768,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "std",
+      "length": 9,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 0.864,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "std",
+      "length": 10,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 0.96,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "std",
+      "length": 11,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 1.056,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "std",
+      "length": 12,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 1.152,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "std",
+      "length": 13,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 1.248,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "std",
+      "length": 14,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 1.344,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "std",
+      "length": 15,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 1.44,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "std",
+      "length": 16,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 1.536,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 1,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.084,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 2,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.168,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 3,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.252,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 4,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.336,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 5,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.42,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 6,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.504,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 7,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.588,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 8,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.672,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 9,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.756,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 10,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.84,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 11,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.924,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 12,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 1.008,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 13,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 1.092,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 14,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 1.176,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 15,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 1.26,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 16,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 1.344,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 1,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 0.126,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 2,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 0.252,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 3,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 0.378,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 4,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 0.504,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 5,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 0.63,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 6,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 0.756,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 7,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 0.882,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 8,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 1.008,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 9,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 1.134,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 10,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 1.26,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 11,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 1.386,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 12,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 1.512,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 13,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 1.638,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 14,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 1.764,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 15,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 1.89,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 16,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 2.016,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "4k",
+      "length": 1,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.372,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "4k",
+      "length": 2,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.744,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "4k",
+      "length": 3,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 1.116,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "4k",
+      "length": 4,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 1.488,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "4k",
+      "length": 5,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 1.86,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "4k",
+      "length": 6,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 2.232,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "4k",
+      "length": 7,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 2.604,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "4k",
+      "length": 8,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 2.976,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "4k",
+      "length": 9,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 3.348,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "4k",
+      "length": 10,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 3.72,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "4k",
+      "length": 11,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 4.092,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "4k",
+      "length": 12,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 4.464,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "4k",
+      "length": 13,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 4.836,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "4k",
+      "length": 14,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 5.208,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "4k",
+      "length": 15,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 5.58,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "4k",
+      "length": 16,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 5.952,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "4k",
+      "length": 1,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 0.372,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "4k",
+      "length": 2,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 0.744,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "4k",
+      "length": 3,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 1.116,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "4k",
+      "length": 4,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 1.488,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "4k",
+      "length": 5,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 1.86,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "4k",
+      "length": 6,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 2.232,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "4k",
+      "length": 7,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 2.604,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "4k",
+      "length": 8,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 2.976,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "4k",
+      "length": 9,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 3.348,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "4k",
+      "length": 10,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 3.72,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "4k",
+      "length": 11,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 4.092,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "4k",
+      "length": 12,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 4.464,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "4k",
+      "length": 13,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 4.836,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "4k",
+      "length": 14,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 5.208,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "4k",
+      "length": 15,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 5.58,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "image to video",
+      "mode": "4k",
+      "length": 16,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 5.952,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "std",
+      "length": 1,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.066,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "std",
+      "length": 2,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.132,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "std",
+      "length": 3,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.198,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "std",
+      "length": 4,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.264,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "std",
+      "length": 5,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.33,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "std",
+      "length": 6,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.396,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "std",
+      "length": 7,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.462,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "std",
+      "length": 8,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.528,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "std",
+      "length": 9,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.594,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "std",
+      "length": 10,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.66,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "std",
+      "length": 11,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.726,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "std",
+      "length": 12,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.792,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "std",
+      "length": 13,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.858,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "std",
+      "length": 14,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.924,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "std",
+      "length": 15,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.99,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "std",
+      "length": 16,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 1.056,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "std",
+      "length": 1,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 0.096,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "std",
+      "length": 2,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 0.192,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "std",
+      "length": 3,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 0.288,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "std",
+      "length": 4,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 0.384,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "std",
+      "length": 5,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 0.48,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "std",
+      "length": 6,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 0.576,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "std",
+      "length": 7,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 0.672,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "std",
+      "length": 8,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 0.768,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "std",
+      "length": 9,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 0.864,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "std",
+      "length": 10,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 0.96,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "std",
+      "length": 11,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 1.056,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "std",
+      "length": 12,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 1.152,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "std",
+      "length": 13,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 1.248,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "std",
+      "length": 14,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 1.344,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "std",
+      "length": 15,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 1.44,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "std",
+      "length": 16,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 1.536,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 1,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.084,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 2,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.168,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 3,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.252,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 4,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.336,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 5,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.42,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 6,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.504,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 7,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.588,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 8,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.672,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 9,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.756,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 10,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.84,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 11,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.924,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 12,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 1.008,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 13,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 1.092,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 14,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 1.176,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 15,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 1.26,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 16,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 1.344,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 1,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 0.126,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 2,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 0.252,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 3,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 0.378,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 4,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 0.504,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 5,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 0.63,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 6,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 0.756,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 7,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 0.882,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 8,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 1.008,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 9,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 1.134,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 10,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 1.26,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 11,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 1.386,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 12,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 1.512,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 13,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 1.638,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 14,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 1.764,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 15,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 1.89,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 16,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 2.016,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "4k",
+      "length": 1,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.372,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "4k",
+      "length": 2,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 0.744,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "4k",
+      "length": 3,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 1.116,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "4k",
+      "length": 4,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 1.488,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "4k",
+      "length": 5,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 1.86,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "4k",
+      "length": 6,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 2.232,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "4k",
+      "length": 7,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 2.604,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "4k",
+      "length": 8,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 2.976,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "4k",
+      "length": 9,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 3.348,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "4k",
+      "length": 10,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 3.72,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "4k",
+      "length": 11,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 4.092,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "4k",
+      "length": 12,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 4.464,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "4k",
+      "length": 13,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 4.836,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "4k",
+      "length": 14,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 5.208,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "4k",
+      "length": 15,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 5.58,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "4k",
+      "length": 16,
+      "resolution": null,
+      "audio": false,
+      "apiPlatformPrice": 5.952,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "4k",
+      "length": 1,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 0.372,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "4k",
+      "length": 2,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 0.744,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "4k",
+      "length": 3,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 1.116,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "4k",
+      "length": 4,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 1.488,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "4k",
+      "length": 5,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 1.86,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "4k",
+      "length": 6,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 2.232,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "4k",
+      "length": 7,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 2.604,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "4k",
+      "length": 8,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 2.976,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "4k",
+      "length": 9,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 3.348,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "4k",
+      "length": 10,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 3.72,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "4k",
+      "length": 11,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 4.092,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "4k",
+      "length": 12,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 4.464,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "4k",
+      "length": 13,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 4.836,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "4k",
+      "length": 14,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 5.208,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "4k",
+      "length": 15,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 5.58,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "kling-v3",
+      "generationType": "text to video",
+      "mode": "4k",
+      "length": 16,
+      "resolution": null,
+      "audio": true,
+      "apiPlatformPrice": 5.952,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "veo-3-1",
+      "generationType": "image to video",
+      "mode": null,
+      "length": 4,
+      "resolution": "720p",
+      "audio": false,
+      "apiPlatformPrice": 0,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "veo-3-1",
+      "generationType": "image to video",
+      "mode": null,
+      "length": 4,
+      "resolution": "720p",
+      "audio": true,
+      "apiPlatformPrice": 0,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "veo-3-1",
+      "generationType": "image to video",
+      "mode": null,
+      "length": 6,
+      "resolution": "720p",
+      "audio": false,
+      "apiPlatformPrice": 0,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "veo-3-1",
+      "generationType": "image to video",
+      "mode": null,
+      "length": 6,
+      "resolution": "720p",
+      "audio": true,
+      "apiPlatformPrice": 0,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "veo-3-1",
+      "generationType": "image to video",
+      "mode": null,
+      "length": 8,
+      "resolution": "720p",
+      "audio": false,
+      "apiPlatformPrice": 0,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "veo-3-1",
+      "generationType": "image to video",
+      "mode": null,
+      "length": 8,
+      "resolution": "720p",
+      "audio": true,
+      "apiPlatformPrice": 0,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "veo-3-1",
+      "generationType": "image to video",
+      "mode": null,
+      "length": 4,
+      "resolution": "1080p",
+      "audio": false,
+      "apiPlatformPrice": 0,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "veo-3-1",
+      "generationType": "image to video",
+      "mode": null,
+      "length": 4,
+      "resolution": "1080p",
+      "audio": true,
+      "apiPlatformPrice": 0,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "veo-3-1",
+      "generationType": "image to video",
+      "mode": null,
+      "length": 6,
+      "resolution": "1080p",
+      "audio": false,
+      "apiPlatformPrice": 0,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "veo-3-1",
+      "generationType": "image to video",
+      "mode": null,
+      "length": 6,
+      "resolution": "1080p",
+      "audio": true,
+      "apiPlatformPrice": 0,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "veo-3-1",
+      "generationType": "image to video",
+      "mode": null,
+      "length": 8,
+      "resolution": "1080p",
+      "audio": false,
+      "apiPlatformPrice": 0,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "veo-3-1",
+      "generationType": "image to video",
+      "mode": null,
+      "length": 8,
+      "resolution": "1080p",
+      "audio": true,
+      "apiPlatformPrice": 0,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "veo-3-1",
+      "generationType": "image to video",
+      "mode": null,
+      "length": 4,
+      "resolution": "4K",
+      "audio": false,
+      "apiPlatformPrice": 0,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "veo-3-1",
+      "generationType": "image to video",
+      "mode": null,
+      "length": 4,
+      "resolution": "4K",
+      "audio": true,
+      "apiPlatformPrice": 0,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "veo-3-1",
+      "generationType": "image to video",
+      "mode": null,
+      "length": 6,
+      "resolution": "4K",
+      "audio": false,
+      "apiPlatformPrice": 0,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "veo-3-1",
+      "generationType": "image to video",
+      "mode": null,
+      "length": 6,
+      "resolution": "4K",
+      "audio": true,
+      "apiPlatformPrice": 0,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "veo-3-1",
+      "generationType": "image to video",
+      "mode": null,
+      "length": 8,
+      "resolution": "4K",
+      "audio": false,
+      "apiPlatformPrice": 0,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "veo-3-1",
+      "generationType": "image to video",
+      "mode": null,
+      "length": 8,
+      "resolution": "4K",
+      "audio": true,
+      "apiPlatformPrice": 0,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "veo-3-1",
+      "generationType": "text to video",
+      "mode": null,
+      "length": 4,
+      "resolution": "720p",
+      "audio": false,
+      "apiPlatformPrice": 0,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "veo-3-1",
+      "generationType": "text to video",
+      "mode": null,
+      "length": 4,
+      "resolution": "720p",
+      "audio": true,
+      "apiPlatformPrice": 0,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "veo-3-1",
+      "generationType": "text to video",
+      "mode": null,
+      "length": 6,
+      "resolution": "720p",
+      "audio": false,
+      "apiPlatformPrice": 0,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "veo-3-1",
+      "generationType": "text to video",
+      "mode": null,
+      "length": 6,
+      "resolution": "720p",
+      "audio": true,
+      "apiPlatformPrice": 0,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "veo-3-1",
+      "generationType": "text to video",
+      "mode": null,
+      "length": 8,
+      "resolution": "720p",
+      "audio": false,
+      "apiPlatformPrice": 0,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "veo-3-1",
+      "generationType": "text to video",
+      "mode": null,
+      "length": 8,
+      "resolution": "720p",
+      "audio": true,
+      "apiPlatformPrice": 0,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "veo-3-1",
+      "generationType": "text to video",
+      "mode": null,
+      "length": 4,
+      "resolution": "1080p",
+      "audio": false,
+      "apiPlatformPrice": 0,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "veo-3-1",
+      "generationType": "text to video",
+      "mode": null,
+      "length": 4,
+      "resolution": "1080p",
+      "audio": true,
+      "apiPlatformPrice": 0,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "veo-3-1",
+      "generationType": "text to video",
+      "mode": null,
+      "length": 6,
+      "resolution": "1080p",
+      "audio": false,
+      "apiPlatformPrice": 0,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "veo-3-1",
+      "generationType": "text to video",
+      "mode": null,
+      "length": 6,
+      "resolution": "1080p",
+      "audio": true,
+      "apiPlatformPrice": 0,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "veo-3-1",
+      "generationType": "text to video",
+      "mode": null,
+      "length": 8,
+      "resolution": "1080p",
+      "audio": false,
+      "apiPlatformPrice": 0,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "veo-3-1",
+      "generationType": "text to video",
+      "mode": null,
+      "length": 8,
+      "resolution": "1080p",
+      "audio": true,
+      "apiPlatformPrice": 0,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "veo-3-1",
+      "generationType": "text to video",
+      "mode": null,
+      "length": 4,
+      "resolution": "4K",
+      "audio": false,
+      "apiPlatformPrice": 0,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "veo-3-1",
+      "generationType": "text to video",
+      "mode": null,
+      "length": 4,
+      "resolution": "4K",
+      "audio": true,
+      "apiPlatformPrice": 0,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "veo-3-1",
+      "generationType": "text to video",
+      "mode": null,
+      "length": 6,
+      "resolution": "4K",
+      "audio": false,
+      "apiPlatformPrice": 0,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "veo-3-1",
+      "generationType": "text to video",
+      "mode": null,
+      "length": 6,
+      "resolution": "4K",
+      "audio": true,
+      "apiPlatformPrice": 0,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "veo-3-1",
+      "generationType": "text to video",
+      "mode": null,
+      "length": 8,
+      "resolution": "4K",
+      "audio": false,
+      "apiPlatformPrice": 0,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "veo-3-1",
+      "generationType": "text to video",
+      "mode": null,
+      "length": 8,
+      "resolution": "4K",
+      "audio": true,
+      "apiPlatformPrice": 0,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "viduq3-pro",
+      "generationType": "image to video",
+      "mode": null,
+      "length": null,
+      "resolution": "360p",
+      "audio": false,
+      "apiPlatformPrice": 0.06,
+      "pricingFormula": "perOutputSecond"
+    },
+    {
+      "aliasModelName": "viduq3-pro",
+      "generationType": "image to video",
+      "mode": null,
+      "length": null,
+      "resolution": "540p",
+      "audio": false,
+      "apiPlatformPrice": 0.06,
+      "pricingFormula": "perOutputSecond"
+    },
+    {
+      "aliasModelName": "viduq3-pro",
+      "generationType": "image to video",
+      "mode": null,
+      "length": null,
+      "resolution": "720p",
+      "audio": false,
+      "apiPlatformPrice": 0.12,
+      "pricingFormula": "perOutputSecond"
+    },
+    {
+      "aliasModelName": "viduq3-pro",
+      "generationType": "image to video",
+      "mode": null,
+      "length": null,
+      "resolution": "1080p",
+      "audio": false,
+      "apiPlatformPrice": 0.15,
+      "pricingFormula": "perOutputSecond"
+    },
+    {
+      "aliasModelName": "viduq3-pro",
+      "generationType": "image to video",
+      "mode": null,
+      "length": null,
+      "resolution": "2K",
+      "audio": false,
+      "apiPlatformPrice": 0.33,
+      "pricingFormula": "perOutputSecond"
+    },
+    {
+      "aliasModelName": "viduq3-pro",
+      "generationType": "text to video",
+      "mode": null,
+      "length": null,
+      "resolution": "360p",
+      "audio": false,
+      "apiPlatformPrice": 0.06,
+      "pricingFormula": "perOutputSecond"
+    },
+    {
+      "aliasModelName": "viduq3-pro",
+      "generationType": "text to video",
+      "mode": null,
+      "length": null,
+      "resolution": "540p",
+      "audio": false,
+      "apiPlatformPrice": 0.06,
+      "pricingFormula": "perOutputSecond"
+    },
+    {
+      "aliasModelName": "viduq3-pro",
+      "generationType": "text to video",
+      "mode": null,
+      "length": null,
+      "resolution": "720p",
+      "audio": false,
+      "apiPlatformPrice": 0.12,
+      "pricingFormula": "perOutputSecond"
+    },
+    {
+      "aliasModelName": "viduq3-pro",
+      "generationType": "text to video",
+      "mode": null,
+      "length": null,
+      "resolution": "1080p",
+      "audio": false,
+      "apiPlatformPrice": 0.15,
+      "pricingFormula": "perOutputSecond"
+    },
+    {
+      "aliasModelName": "viduq3-pro",
+      "generationType": "text to video",
+      "mode": null,
+      "length": null,
+      "resolution": "2K",
+      "audio": false,
+      "apiPlatformPrice": 0.33,
+      "pricingFormula": "perOutputSecond"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "basic",
+      "length": 4,
+      "resolution": "720p",
+      "audio": true,
+      "apiPlatformPrice": 0.288,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "basic",
+      "length": 4,
+      "resolution": "1080p",
+      "audio": true,
+      "apiPlatformPrice": 0.384,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "basic",
+      "length": 4,
+      "resolution": "720p",
+      "audio": false,
+      "apiPlatformPrice": 0.12,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "basic",
+      "length": 4,
+      "resolution": "1080p",
+      "audio": false,
+      "apiPlatformPrice": 0.216,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 4,
+      "resolution": "720p",
+      "audio": true,
+      "apiPlatformPrice": 0.312,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 4,
+      "resolution": "1080p",
+      "audio": true,
+      "apiPlatformPrice": 0.408,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 4,
+      "resolution": "720p",
+      "audio": false,
+      "apiPlatformPrice": 0.144,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 4,
+      "resolution": "1080p",
+      "audio": false,
+      "apiPlatformPrice": 0.24,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "basic",
+      "length": 5,
+      "resolution": "720p",
+      "audio": true,
+      "apiPlatformPrice": 0.36,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "basic",
+      "length": 5,
+      "resolution": "1080p",
+      "audio": true,
+      "apiPlatformPrice": 0.48,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "basic",
+      "length": 5,
+      "resolution": "720p",
+      "audio": false,
+      "apiPlatformPrice": 0.15,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "basic",
+      "length": 5,
+      "resolution": "1080p",
+      "audio": false,
+      "apiPlatformPrice": 0.27,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 5,
+      "resolution": "720p",
+      "audio": true,
+      "apiPlatformPrice": 0.39,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 5,
+      "resolution": "1080p",
+      "audio": true,
+      "apiPlatformPrice": 0.51,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 5,
+      "resolution": "720p",
+      "audio": false,
+      "apiPlatformPrice": 0.18,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 5,
+      "resolution": "1080p",
+      "audio": false,
+      "apiPlatformPrice": 0.3,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "basic",
+      "length": 6,
+      "resolution": "720p",
+      "audio": true,
+      "apiPlatformPrice": 0.432,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "basic",
+      "length": 6,
+      "resolution": "1080p",
+      "audio": true,
+      "apiPlatformPrice": 0.576,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "basic",
+      "length": 6,
+      "resolution": "720p",
+      "audio": false,
+      "apiPlatformPrice": 0.18,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "basic",
+      "length": 6,
+      "resolution": "1080p",
+      "audio": false,
+      "apiPlatformPrice": 0.324,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 6,
+      "resolution": "720p",
+      "audio": true,
+      "apiPlatformPrice": 0.468,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 6,
+      "resolution": "1080p",
+      "audio": true,
+      "apiPlatformPrice": 0.612,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 6,
+      "resolution": "720p",
+      "audio": false,
+      "apiPlatformPrice": 0.216,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 6,
+      "resolution": "1080p",
+      "audio": false,
+      "apiPlatformPrice": 0.36,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "basic",
+      "length": 7,
+      "resolution": "720p",
+      "audio": true,
+      "apiPlatformPrice": 0.504,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "basic",
+      "length": 7,
+      "resolution": "1080p",
+      "audio": true,
+      "apiPlatformPrice": 0.672,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "basic",
+      "length": 7,
+      "resolution": "720p",
+      "audio": false,
+      "apiPlatformPrice": 0.21,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "basic",
+      "length": 7,
+      "resolution": "1080p",
+      "audio": false,
+      "apiPlatformPrice": 0.378,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 7,
+      "resolution": "720p",
+      "audio": true,
+      "apiPlatformPrice": 0.546,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 7,
+      "resolution": "1080p",
+      "audio": true,
+      "apiPlatformPrice": 0.714,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 7,
+      "resolution": "720p",
+      "audio": false,
+      "apiPlatformPrice": 0.252,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 7,
+      "resolution": "1080p",
+      "audio": false,
+      "apiPlatformPrice": 0.42,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "basic",
+      "length": 8,
+      "resolution": "720p",
+      "audio": true,
+      "apiPlatformPrice": 0.576,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "basic",
+      "length": 8,
+      "resolution": "1080p",
+      "audio": true,
+      "apiPlatformPrice": 0.768,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "basic",
+      "length": 8,
+      "resolution": "720p",
+      "audio": false,
+      "apiPlatformPrice": 0.24,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "basic",
+      "length": 8,
+      "resolution": "1080p",
+      "audio": false,
+      "apiPlatformPrice": 0.432,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 8,
+      "resolution": "720p",
+      "audio": true,
+      "apiPlatformPrice": 0.624,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 8,
+      "resolution": "1080p",
+      "audio": true,
+      "apiPlatformPrice": 0.816,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 8,
+      "resolution": "720p",
+      "audio": false,
+      "apiPlatformPrice": 0.288,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 8,
+      "resolution": "1080p",
+      "audio": false,
+      "apiPlatformPrice": 0.48,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "basic",
+      "length": 9,
+      "resolution": "720p",
+      "audio": true,
+      "apiPlatformPrice": 0.648,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "basic",
+      "length": 9,
+      "resolution": "1080p",
+      "audio": true,
+      "apiPlatformPrice": 0.864,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "basic",
+      "length": 9,
+      "resolution": "720p",
+      "audio": false,
+      "apiPlatformPrice": 0.27,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "basic",
+      "length": 9,
+      "resolution": "1080p",
+      "audio": false,
+      "apiPlatformPrice": 0.486,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 9,
+      "resolution": "720p",
+      "audio": true,
+      "apiPlatformPrice": 0.702,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 9,
+      "resolution": "1080p",
+      "audio": true,
+      "apiPlatformPrice": 0.918,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 9,
+      "resolution": "720p",
+      "audio": false,
+      "apiPlatformPrice": 0.324,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 9,
+      "resolution": "1080p",
+      "audio": false,
+      "apiPlatformPrice": 0.54,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "basic",
+      "length": 10,
+      "resolution": "720p",
+      "audio": true,
+      "apiPlatformPrice": 0.72,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "basic",
+      "length": 10,
+      "resolution": "1080p",
+      "audio": true,
+      "apiPlatformPrice": 0.96,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "basic",
+      "length": 10,
+      "resolution": "720p",
+      "audio": false,
+      "apiPlatformPrice": 0.3,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "basic",
+      "length": 10,
+      "resolution": "1080p",
+      "audio": false,
+      "apiPlatformPrice": 0.54,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 10,
+      "resolution": "720p",
+      "audio": true,
+      "apiPlatformPrice": 0.78,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 10,
+      "resolution": "1080p",
+      "audio": true,
+      "apiPlatformPrice": 1.02,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 10,
+      "resolution": "720p",
+      "audio": false,
+      "apiPlatformPrice": 0.36,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 10,
+      "resolution": "1080p",
+      "audio": false,
+      "apiPlatformPrice": 0.6,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "basic",
+      "length": 11,
+      "resolution": "720p",
+      "audio": true,
+      "apiPlatformPrice": 0.792,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "basic",
+      "length": 11,
+      "resolution": "1080p",
+      "audio": true,
+      "apiPlatformPrice": 1.056,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "basic",
+      "length": 11,
+      "resolution": "720p",
+      "audio": false,
+      "apiPlatformPrice": 0.33,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "basic",
+      "length": 11,
+      "resolution": "1080p",
+      "audio": false,
+      "apiPlatformPrice": 0.594,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 11,
+      "resolution": "720p",
+      "audio": true,
+      "apiPlatformPrice": 0.858,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 11,
+      "resolution": "1080p",
+      "audio": true,
+      "apiPlatformPrice": 1.122,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 11,
+      "resolution": "720p",
+      "audio": false,
+      "apiPlatformPrice": 0.396,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 11,
+      "resolution": "1080p",
+      "audio": false,
+      "apiPlatformPrice": 0.66,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "basic",
+      "length": 12,
+      "resolution": "720p",
+      "audio": true,
+      "apiPlatformPrice": 0.864,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "basic",
+      "length": 12,
+      "resolution": "1080p",
+      "audio": true,
+      "apiPlatformPrice": 1.152,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "basic",
+      "length": 12,
+      "resolution": "720p",
+      "audio": false,
+      "apiPlatformPrice": 0.36,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "basic",
+      "length": 12,
+      "resolution": "1080p",
+      "audio": false,
+      "apiPlatformPrice": 0.648,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 12,
+      "resolution": "720p",
+      "audio": true,
+      "apiPlatformPrice": 0.936,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 12,
+      "resolution": "1080p",
+      "audio": true,
+      "apiPlatformPrice": 1.224,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 12,
+      "resolution": "720p",
+      "audio": false,
+      "apiPlatformPrice": 0.432,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 12,
+      "resolution": "1080p",
+      "audio": false,
+      "apiPlatformPrice": 0.72,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "basic",
+      "length": 15,
+      "resolution": "720p",
+      "audio": true,
+      "apiPlatformPrice": 1.08,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "basic",
+      "length": 15,
+      "resolution": "1080p",
+      "audio": true,
+      "apiPlatformPrice": 1.44,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 15,
+      "resolution": "720p",
+      "audio": true,
+      "apiPlatformPrice": 1.17,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "text to video",
+      "mode": "pro",
+      "length": 15,
+      "resolution": "1080p",
+      "audio": true,
+      "apiPlatformPrice": 1.53,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "basic",
+      "length": 4,
+      "resolution": "720p",
+      "audio": true,
+      "apiPlatformPrice": 0.288,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "basic",
+      "length": 4,
+      "resolution": "1080p",
+      "audio": true,
+      "apiPlatformPrice": 0.384,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "basic",
+      "length": 4,
+      "resolution": "720p",
+      "audio": false,
+      "apiPlatformPrice": 0.12,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "basic",
+      "length": 4,
+      "resolution": "1080p",
+      "audio": false,
+      "apiPlatformPrice": 0.216,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 4,
+      "resolution": "720p",
+      "audio": true,
+      "apiPlatformPrice": 0.312,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 4,
+      "resolution": "1080p",
+      "audio": true,
+      "apiPlatformPrice": 0.408,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 4,
+      "resolution": "720p",
+      "audio": false,
+      "apiPlatformPrice": 0.144,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 4,
+      "resolution": "1080p",
+      "audio": false,
+      "apiPlatformPrice": 0.24,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "basic",
+      "length": 5,
+      "resolution": "720p",
+      "audio": true,
+      "apiPlatformPrice": 0.36,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "basic",
+      "length": 5,
+      "resolution": "1080p",
+      "audio": true,
+      "apiPlatformPrice": 0.48,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "basic",
+      "length": 5,
+      "resolution": "720p",
+      "audio": false,
+      "apiPlatformPrice": 0.15,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "basic",
+      "length": 5,
+      "resolution": "1080p",
+      "audio": false,
+      "apiPlatformPrice": 0.27,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 5,
+      "resolution": "720p",
+      "audio": true,
+      "apiPlatformPrice": 0.39,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 5,
+      "resolution": "1080p",
+      "audio": true,
+      "apiPlatformPrice": 0.51,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 5,
+      "resolution": "720p",
+      "audio": false,
+      "apiPlatformPrice": 0.18,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 5,
+      "resolution": "1080p",
+      "audio": false,
+      "apiPlatformPrice": 0.3,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "basic",
+      "length": 6,
+      "resolution": "720p",
+      "audio": true,
+      "apiPlatformPrice": 0.432,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "basic",
+      "length": 6,
+      "resolution": "1080p",
+      "audio": true,
+      "apiPlatformPrice": 0.576,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "basic",
+      "length": 6,
+      "resolution": "720p",
+      "audio": false,
+      "apiPlatformPrice": 0.18,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "basic",
+      "length": 6,
+      "resolution": "1080p",
+      "audio": false,
+      "apiPlatformPrice": 0.324,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 6,
+      "resolution": "720p",
+      "audio": true,
+      "apiPlatformPrice": 0.468,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 6,
+      "resolution": "1080p",
+      "audio": true,
+      "apiPlatformPrice": 0.612,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 6,
+      "resolution": "720p",
+      "audio": false,
+      "apiPlatformPrice": 0.216,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 6,
+      "resolution": "1080p",
+      "audio": false,
+      "apiPlatformPrice": 0.36,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "basic",
+      "length": 7,
+      "resolution": "720p",
+      "audio": true,
+      "apiPlatformPrice": 0.504,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "basic",
+      "length": 7,
+      "resolution": "1080p",
+      "audio": true,
+      "apiPlatformPrice": 0.672,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "basic",
+      "length": 7,
+      "resolution": "720p",
+      "audio": false,
+      "apiPlatformPrice": 0.21,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "basic",
+      "length": 7,
+      "resolution": "1080p",
+      "audio": false,
+      "apiPlatformPrice": 0.378,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 7,
+      "resolution": "720p",
+      "audio": true,
+      "apiPlatformPrice": 0.546,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 7,
+      "resolution": "1080p",
+      "audio": true,
+      "apiPlatformPrice": 0.714,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 7,
+      "resolution": "720p",
+      "audio": false,
+      "apiPlatformPrice": 0.252,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 7,
+      "resolution": "1080p",
+      "audio": false,
+      "apiPlatformPrice": 0.42,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "basic",
+      "length": 8,
+      "resolution": "720p",
+      "audio": true,
+      "apiPlatformPrice": 0.576,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "basic",
+      "length": 8,
+      "resolution": "1080p",
+      "audio": true,
+      "apiPlatformPrice": 0.768,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "basic",
+      "length": 8,
+      "resolution": "720p",
+      "audio": false,
+      "apiPlatformPrice": 0.24,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "basic",
+      "length": 8,
+      "resolution": "1080p",
+      "audio": false,
+      "apiPlatformPrice": 0.432,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 8,
+      "resolution": "720p",
+      "audio": true,
+      "apiPlatformPrice": 0.624,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 8,
+      "resolution": "1080p",
+      "audio": true,
+      "apiPlatformPrice": 0.816,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 8,
+      "resolution": "720p",
+      "audio": false,
+      "apiPlatformPrice": 0.288,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 8,
+      "resolution": "1080p",
+      "audio": false,
+      "apiPlatformPrice": 0.48,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "basic",
+      "length": 9,
+      "resolution": "720p",
+      "audio": true,
+      "apiPlatformPrice": 0.648,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "basic",
+      "length": 9,
+      "resolution": "1080p",
+      "audio": true,
+      "apiPlatformPrice": 0.864,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "basic",
+      "length": 9,
+      "resolution": "720p",
+      "audio": false,
+      "apiPlatformPrice": 0.27,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "basic",
+      "length": 9,
+      "resolution": "1080p",
+      "audio": false,
+      "apiPlatformPrice": 0.486,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 9,
+      "resolution": "720p",
+      "audio": true,
+      "apiPlatformPrice": 0.702,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 9,
+      "resolution": "1080p",
+      "audio": true,
+      "apiPlatformPrice": 0.918,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 9,
+      "resolution": "720p",
+      "audio": false,
+      "apiPlatformPrice": 0.324,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 9,
+      "resolution": "1080p",
+      "audio": false,
+      "apiPlatformPrice": 0.54,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "basic",
+      "length": 10,
+      "resolution": "720p",
+      "audio": true,
+      "apiPlatformPrice": 0.72,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "basic",
+      "length": 10,
+      "resolution": "1080p",
+      "audio": true,
+      "apiPlatformPrice": 0.96,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "basic",
+      "length": 10,
+      "resolution": "720p",
+      "audio": false,
+      "apiPlatformPrice": 0.3,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "basic",
+      "length": 10,
+      "resolution": "1080p",
+      "audio": false,
+      "apiPlatformPrice": 0.54,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 10,
+      "resolution": "720p",
+      "audio": true,
+      "apiPlatformPrice": 0.78,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 10,
+      "resolution": "1080p",
+      "audio": true,
+      "apiPlatformPrice": 1.02,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 10,
+      "resolution": "720p",
+      "audio": false,
+      "apiPlatformPrice": 0.36,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 10,
+      "resolution": "1080p",
+      "audio": false,
+      "apiPlatformPrice": 0.6,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "basic",
+      "length": 11,
+      "resolution": "720p",
+      "audio": true,
+      "apiPlatformPrice": 0.792,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "basic",
+      "length": 11,
+      "resolution": "1080p",
+      "audio": true,
+      "apiPlatformPrice": 1.056,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "basic",
+      "length": 11,
+      "resolution": "720p",
+      "audio": false,
+      "apiPlatformPrice": 0.33,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "basic",
+      "length": 11,
+      "resolution": "1080p",
+      "audio": false,
+      "apiPlatformPrice": 0.594,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 11,
+      "resolution": "720p",
+      "audio": true,
+      "apiPlatformPrice": 0.858,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 11,
+      "resolution": "1080p",
+      "audio": true,
+      "apiPlatformPrice": 1.122,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 11,
+      "resolution": "720p",
+      "audio": false,
+      "apiPlatformPrice": 0.396,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 11,
+      "resolution": "1080p",
+      "audio": false,
+      "apiPlatformPrice": 0.66,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "basic",
+      "length": 12,
+      "resolution": "720p",
+      "audio": true,
+      "apiPlatformPrice": 0.864,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "basic",
+      "length": 12,
+      "resolution": "1080p",
+      "audio": true,
+      "apiPlatformPrice": 1.152,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "basic",
+      "length": 12,
+      "resolution": "720p",
+      "audio": false,
+      "apiPlatformPrice": 0.36,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "basic",
+      "length": 12,
+      "resolution": "1080p",
+      "audio": false,
+      "apiPlatformPrice": 0.648,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 12,
+      "resolution": "720p",
+      "audio": true,
+      "apiPlatformPrice": 0.936,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 12,
+      "resolution": "1080p",
+      "audio": true,
+      "apiPlatformPrice": 1.224,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 12,
+      "resolution": "720p",
+      "audio": false,
+      "apiPlatformPrice": 0.432,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 12,
+      "resolution": "1080p",
+      "audio": false,
+      "apiPlatformPrice": 0.72,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "basic",
+      "length": 15,
+      "resolution": "720p",
+      "audio": true,
+      "apiPlatformPrice": 1.08,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "basic",
+      "length": 15,
+      "resolution": "1080p",
+      "audio": true,
+      "apiPlatformPrice": 1.44,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 15,
+      "resolution": "720p",
+      "audio": true,
+      "apiPlatformPrice": 1.17,
+      "pricingFormula": "fixed"
+    },
+    {
+      "aliasModelName": "pollo-v2-5",
+      "generationType": "image to video",
+      "mode": "pro",
+      "length": 15,
+      "resolution": "1080p",
+      "audio": true,
+      "apiPlatformPrice": 1.53,
+      "pricingFormula": "fixed"
+    }
+  ]
+}
