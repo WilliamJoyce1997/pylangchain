@@ -959,7 +959,7 @@ def index():
 
         # init LLM
         try:
-            llm = ChatDeepSeek(model="deepseek-v4-flash", api_key=deepseek_key)
+            llm = ChatDeepSeek(model="deepseek-flash", api_key=deepseek_key)
         except Exception as e:
             answer = f"❌ 初始化 DeepSeek LLM 失败: {e}"
             return render_template('main.html', answer=answer, **form_values)
