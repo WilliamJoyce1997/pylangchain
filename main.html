@@ -66,7 +66,7 @@
                                 回复语音
                             </label>
                         </div><div class="section hidden" id="section_video">
-                            <h3>视频生成（Pollo）</h3>
+                            <h3>视频生成</h3>
                             <label>视频模型选择:
                                 <select name="video_model" id="video_model">
                                     {% for model_id, model_spec in video_models.items() %}
@@ -77,10 +77,10 @@
 
                             <label>生成方式:
                                 <select name="video_generation_type" id="video_generation_type">
-                                    <option value="auto" {% if video_generation_type == 'auto' %}selected{% endif %}>按首帧图片 URL 自动判断</option>
+                                    <option value="auto" {% if video_generation_type == 'auto' %}selected{% endif %}>按首帧图片自动判断</option>
                                     <option value="text" {% if video_generation_type == 'text' %}selected{% endif %}>文生视频</option>
                                     <option value="image" {% if video_generation_type == 'image' %}selected{% endif %}>图生视频</option>
-                                    <option value="reference" {% if video_generation_type == 'reference' %}selected{% endif %}>参考图生视频（Veo 3.1）</option>
+                                    <option value="reference" {% if video_generation_type == 'reference' %}selected{% endif %}>多图参考视频</option>
                                 </select>
                             </label>
 
@@ -91,15 +91,17 @@
                             <label id="video_image_field">首帧图片 URL（图生视频必填）:
                                 <input type="text" name="video_image_url" id="video_image_url" placeholder="https://example.com/image.png" value="{{ video_image_url if video_image_url else '' }}">
                             </label>
-                            <div class="small">提示：填写图片 URL 时使用图生视频，否则使用文生视频。图片须可通过 HTTP(S) 访问。可选参数留空时使用模型默认值。</div>
+                            <label id="video_upload_field" hidden>或上传 1 张首帧图（PNG/JPEG/WebP）：<input type="file" id="video_image_file" name="video_image_file" accept="image/png,image/jpeg,image/webp" disabled></label>
+                            <label id="video_refs_upload_field" hidden>上传参考图（与 URL 合计最多 14 张）：<input type="file" id="video_refs_files" name="video_refs_files" accept="image/png,image/jpeg,image/webp" multiple disabled></label>
+                            <div class="small" id="video_input_hint">可选参数留空时使用模型默认值。</div>
                             <div class="small" id="video_prompt_limit"></div>
                             <div id="video_options"></div>
-                            <label>完成通知回调 URL（可选）:
+                            <label id="video_webhook_field">完成通知回调 URL（可选）:
                                 <input type="text" name="video_webhookUrl" id="video_webhookUrl" value="{{ video_webhookUrl }}" placeholder="https://example.com/callback">
                             </label>
-                            <div class="small">Pollo 2.5 的 15 秒视频必须开启音频；Kling 3.0 支持 3–15 秒；Veo 3.1 参考图模式支持 1–3 张图片、8 秒、720p/1080p。</div>
+                            <div class="small" id="video_model_hint"></div>
                             <div id="video_price_estimate" role="status" aria-live="polite">正在核对价格…</div>
-                            <div class="small">价格快照：{{ video_pricing_read_at }}。<a href="https://api.pollo.ai/zh/pricing" target="_blank" rel="noopener noreferrer">官方价格页</a>。预估费用供提交前参考，最终以实际结算为准；未公布的价格不作推算。</div>
+                            <div class="small" id="video_price_note">价格快照：{{ video_pricing_read_at }}。<a href="https://api.pollo.ai/zh/pricing" target="_blank" rel="noopener noreferrer">官方价格页</a>。预估费用供提交前参考，最终以实际结算为准；未公布的价格不作推算。</div>
 
                             <label>媒体保存目录:
                                 <input type="text" name="media_dir" placeholder="C:\Picture&Video" value="{{ media_dir if media_dir else 'C:\\Picture&Video' }}">
@@ -109,9 +111,10 @@
                                 <button type="submit" name="send_video" value="1">视频发送</button>
                             </div>
                         </div><div class="section hidden" id="section_image">
-                            <h3>图片生成（豆包）</h3>
+                            <h3>图片生成</h3>
                             <label>模型（可选）:
-                                <select name="ark_model">
+                                <select name="ark_model" id="image_model">
+                                    <option value="grok-imagine-image-2.0" {% if ark_model == 'grok-imagine-image-2.0' %}selected{% endif %}>grok-imagine-image-2.0</option>
                                     <option value="doubao-seedream-5-0-260128"
                                         {% if ark_model == 'doubao-seedream-5-0-260128' or not ark_model %}selected{% endif %}>
                                         Seedream5.0lite
@@ -127,11 +130,16 @@
                                 <textarea name="image_prompt" rows="3" cols="60" placeholder="请输入图像生成的提示词">{{ image_prompt }}</textarea>
                             </label>
 
-                            <label>图生图（可选：上传参考图，1~14张）:
+                            <label><span id="image_reference_hint">图生图（可选：最多 14 张）</span>:
                                 <input type="file" name="img2img_file" id="img2img_file" accept="image/*" multiple>
                                 <span id="img2img_file_list" style="margin-left:8px; color:#555;">{{ img2img_file if img2img_file else '' }}</span>
                             </label>
 
+                            <button type="button" id="clear_image_refs">清空参考图</button>
+                            <div id="xai_image_options" hidden>
+                                <label>分辨率：<select name="xai_image_resolution" id="xai_image_resolution" disabled><option value="">默认（1k）</option>{% for value in ['1k', '2k'] %}<option value="{{ value }}" {% if xai_image_resolution == value %}selected{% endif %}>{{ value }}</option>{% endfor %}</select></label>
+                                <label>质量：<select name="xai_image_quality" id="xai_image_quality" disabled><option value="">默认（auto）</option>{% for value in ['auto', 'low', 'medium'] %}<option value="{{ value }}" {% if xai_image_quality == value %}selected{% endif %}>{{ value }}</option>{% endfor %}</select></label>
+                            </div>
                             <label>图片尺寸比例:
                                 <select name="img_ratio">
                                     <option value="1:1" {% if img_ratio=='1:1' %}selected{% endif %}>1:1</option>
@@ -171,8 +179,9 @@
 <label>豆包语音 API<span class="password-wrap"><input autocomplete="off" type="password" name="asr_ark_key" id="asr_ark_key" value="{{ asr_ark_key }}" data-secret><button type="button" data-password-toggle aria-label="显示豆包语音 API"><svg class="icon" aria-hidden="true"><use href="#icon-eye"></use></svg></button></span></label>
 <label>豆包 Token<span class="password-wrap"><input autocomplete="off" type="password" name="doubao_token" value="{{ doubao_token }}" data-secret><button type="button" data-password-toggle aria-label="显示豆包 Token"><svg class="icon" aria-hidden="true"><use href="#icon-eye"></use></svg></button></span></label>
 <label>豆包 AppID<span class="password-wrap"><input autocomplete="off" type="text" name="doubao_appid" value="{{ doubao_appid }}" ></span></label>
-<label>火山引擎 API Key<span class="password-wrap"><input autocomplete="off" type="password" name="ark_key" value="{{ ark_key }}" data-secret><button type="button" data-password-toggle aria-label="显示火山引擎 API Key"><svg class="icon" aria-hidden="true"><use href="#icon-eye"></use></svg></button></span></label>
-<label>Pollo API Key<span class="password-wrap"><input autocomplete="off" type="password" name="pollo_key" value="{{ pollo_key }}" data-secret><button type="button" data-password-toggle aria-label="显示Pollo API Key"><svg class="icon" aria-hidden="true"><use href="#icon-eye"></use></svg></button></span></label>
+<label>Seedream 图片 API Key<span class="password-wrap"><input autocomplete="off" type="password" name="ark_key" value="{{ ark_key }}" data-secret><button type="button" data-password-toggle aria-label="显示Seedream 图片 API Key"><svg class="icon" aria-hidden="true"><use href="#icon-eye"></use></svg></button></span></label>
+<label>xAI (Grok) API Key<span class="password-wrap"><input autocomplete="off" type="password" name="xai_key" value="{{ xai_key }}" data-secret><button type="button" data-password-toggle aria-label="显示 xAI API Key"><svg class="icon" aria-hidden="true"><use href="#icon-eye"></use></svg></button></span></label>
+<label>视频平台 API Key<span class="password-wrap"><input autocomplete="off" type="password" name="pollo_key" value="{{ pollo_key }}" data-secret><button type="button" data-password-toggle aria-label="显示视频平台 API Key"><svg class="icon" aria-hidden="true"><use href="#icon-eye"></use></svg></button></span></label>
 <p class="notice">密钥仅保留在当前页面内存及表单回填中，不会保存到浏览器历史或 localStorage。直接刷新或重新打开页面后需重新填写。</p></div>
 <div class="settings-fields hidden" data-settings-page="local">
 <label>本地文件操作根目录<input type="text" name="base_dir" placeholder="C:\Script&File" value="{{ base_dir }}"></label>
@@ -211,7 +220,7 @@
 
         function selectedVideoKind() {
             return videoKindSelect.value === 'auto'
-                ? (videoImageInput.value.trim() ? 'image' : 'text') : videoKindSelect.value;
+                ? (videoImageInput.value.trim() || (videoModels[videoModelSelect.value].provider === 'xai' && document.getElementById('video_image_file').files.length) ? 'image' : 'text') : videoKindSelect.value;
         }
 
         function collectVideoOptions() {
@@ -246,16 +255,33 @@
             const schema = model.variants[kind].properties;
             document.getElementById('video_image_field').hidden = !schema.image && videoKindSelect.value !== 'auto';
             videoImageInput.disabled = !schema.image && videoKindSelect.value !== 'auto';
-            videoPromptInput.maxLength = schema.prompt.maxLength;
+            if (schema.prompt.maxLength) videoPromptInput.maxLength = schema.prompt.maxLength;
+            else videoPromptInput.removeAttribute('maxlength');
+            const xai = model.provider === 'xai';
+            const firstUpload = document.getElementById('video_image_file');
+            const refsUpload = document.getElementById('video_refs_files');
+            firstUpload.disabled = !xai || kind !== 'image' && videoKindSelect.value !== 'auto';
+            refsUpload.disabled = !xai || kind !== 'reference';
+            document.getElementById('video_upload_field').hidden = firstUpload.disabled;
+            document.getElementById('video_refs_upload_field').hidden = refsUpload.disabled;
+            document.getElementById('video_webhook_field').hidden = xai;
+            document.getElementById('video_webhookUrl').disabled = xai;
+            document.getElementById('video_input_hint').textContent = xai
+                ? '首帧图可用在线 URL 或上传文件，二选一。图片支持 PNG/JPEG/WebP；切换方式后仅提交当前显示的图片字段。'
+                : '图片须可通过 HTTP(S) 访问。可选参数留空时使用模型默认值。';
+            document.getElementById('video_model_hint').textContent = xai
+                ? '支持 1–15 秒，默认带音频，可关闭。图生视频跟随输入图比例。1.5 多图参考最多 14 张、最高 720p；Lite 仅支持文字或单张首帧图，1080p 由 720p 放大。'
+                : '不同模型支持的时长、分辨率与音频参数以当前选项为准。';
+            document.getElementById('video_price_note').hidden = xai;
             document.getElementById('video_prompt_limit').textContent =
-                kindLabels[kind] + '；提示文本最多 ' + schema.prompt.maxLength + ' 个字符。' +
+                kindLabels[kind] + (schema.prompt.maxLength ? '；提示文本最多 ' + schema.prompt.maxLength + ' 个字符。' : '。') +
                 (kind === 'image' ? '图片必填，提示词可选。' : '提示词必填。');
             videoOptionsContainer.replaceChildren();
             Object.entries(videoLabels).forEach(([name, labelText]) => {
                 const spec = schema[name];
                 if (!spec) return;
                 const label = document.createElement('label');
-                label.textContent = labelText + ': ';
+                label.textContent = (name === 'refs' ? '参考图片 URL（每行一张，最多 ' + spec.maxItems + ' 张）' : labelText) + ': ';
                 let input;
                 const remembered = videoOptionCache[name] || '';
                 if (spec.enum || spec.type === 'boolean') {
@@ -324,7 +350,7 @@
                 const data = new URLSearchParams();
                 document.querySelectorAll('#section_video [name]').forEach(input => {
                     if (!input.disabled && input.name !== 'send_video' && input.name !== 'media_dir') {
-                        data.set(input.name, input.value);
+                        if (input.type !== 'file') data.set(input.name, input.value);
                     }
                 });
                 try {
@@ -341,7 +367,9 @@
             }, 350);
         }
 
-        videoModelSelect.addEventListener('change', renderVideoOptions);
+        videoModelSelect.addEventListener('change', () => { const refs = document.getElementById('video_refs'); if (refs) refs.value = ''; videoOptionCache.refs = ''; renderVideoOptions(); });
+        document.getElementById('video_image_file').addEventListener('change', renderVideoOptions);
+        document.getElementById('video_refs_files').addEventListener('change', scheduleVideoEstimate);
         videoKindSelect.addEventListener('change', renderVideoOptions);
         videoImageInput.addEventListener('input', renderVideoOptions);
         videoPromptInput.addEventListener('input', scheduleVideoEstimate);
@@ -446,6 +474,25 @@
             selectedMicId = micSelect.value || null;
         });
 
+        const imageModel = document.getElementById('image_model');
+        const imageRatios = {{ xai_image_ratios | tojson }};
+        const originalRatios = [...document.querySelector('[name="img_ratio"]').options].map(option => option.value);
+        function updateImageModel(preferredRatio) {
+            const xai = imageModel.value === 'grok-imagine-image-2.0';
+            document.getElementById('image_reference_hint').textContent = '图生图（可选：上传 PNG/JPEG/WebP，最多 ' + (xai ? 5 : 14) + ' 张）';
+            document.getElementById('xai_image_options').hidden = !xai;
+            document.getElementById('xai_image_resolution').disabled = !xai;
+            document.getElementById('xai_image_quality').disabled = !xai;
+            const ratio = document.querySelector('[name="img_ratio"]');
+            const selected = typeof preferredRatio === 'string' ? preferredRatio : ratio.value;
+            ratio.replaceChildren(...(xai ? imageRatios : originalRatios).map(value => new Option(value, value)));
+            ratio.value = [...ratio.options].some(option => option.value === selected) ? selected : '1:1';
+        }
+        imageModel.addEventListener('change', updateImageModel);
+        document.getElementById('clear_image_refs').addEventListener('click', () => {
+            img2imgTransfer.items.clear(); img2imgInput.files = img2imgTransfer.files; img2imgList.textContent = '尚未选择参考图';
+        });
+        updateImageModel({{ img_ratio | tojson }});
         if (img2imgInput && img2imgList) {
             img2imgInput.addEventListener('change', () => {
                 const files = Array.from(img2imgInput.files || []);

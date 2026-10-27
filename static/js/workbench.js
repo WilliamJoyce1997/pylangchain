@@ -229,8 +229,8 @@
     }
     function validateSubmission(button) {
         const action=button?.name||'chat';
-        const required=action==='send_image' ? ['ark_key','image_prompt'] :
-            action==='send_video' ? ['pollo_key'] :
+        const required=action==='send_image' ? [form.elements.namedItem('ark_model').value === 'grok-imagine-image-2.0' ? 'xai_key' : 'ark_key','image_prompt'] :
+            action==='send_video' ? [form.elements.namedItem('video_model').value.startsWith('grok-imagine-') ? 'xai_key' : 'pollo_key'] :
             ['voice_upload','check_voice_status'].includes(action) ? ['doubao_token','doubao_appid','voice_speaker_id'] :
             action==='clear_memory' ? [] : ['deepseek_key','query'];
         for(const name of required) {
@@ -242,7 +242,17 @@
                 input?.focus();return false;
             }
         }
+        if(action==='send_image') {
+            const maximum=form.elements.namedItem('ark_model').value==='grok-imagine-image-2.0'?5:14;
+            if($('img2img_file').files.length>maximum){toast('当前图片模型最多支持 '+maximum+' 张参考图，请清空后重新选择。');return false;}
+        }
         if(action==='send_video') {
+            const xai=form.elements.namedItem('video_model').value.startsWith('grok-imagine-');
+            const first=$('video_image_file'),refs=$('video_refs_files');
+            if(xai&&!first.disabled&&first.files.length&&$('video_image_url').value.trim()){toast('首帧图片 URL 与上传文件请选择一种。');return false;}
+            const urls=$('video_refs')?.value.split(/\r?\n/).filter(value=>value.trim()).length||0;
+            const maximum=xai?14:3;
+            if(urls+(!refs.disabled?refs.files.length:0)>maximum){toast('参考图片合计最多 '+maximum+' 张。');return false;}
             const invalid=[...$('section_video').querySelectorAll('input,textarea,select')].find(input=>!input.disabled&&!input.checkValidity());
             if(invalid){invalid.reportValidity();return false;}
         }

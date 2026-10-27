@@ -1,54 +1,140 @@
-# AI Assistant — 本地多模态智能助手
+# 灵思 AI — 本地多模态智能助手
 
-基于 Python Flask 和 LangChain 开发的本地 AI 助手系统，通过外部 AI API 实现多模态交互及本地工具调用。
+基于 Python、Flask 和 LangChain 的个人 AI 工作台，提供智能问答、联网检索、本地工具调用，以及图片、视频和语音生成。
 
-## 主要功能
-
-- DeepSeek 智能问答
-- 秘塔联网搜索与网页读取
-- 本地记忆与角色设定
-- LangChain 本地文件管理及脚本执行
-- 浏览器语音识别
-- 豆包音色训练与 TTS 语音合成
-- 火山方舟图片生成
-- Pollo 视频生成
-- 浏览器聊天记录管理
-
-## 技术栈
-
-- 后端：Python、Flask
-- AI 框架：LangChain
-- 前端：HTML、CSS、JavaScript、Jinja2
-- 模型服务：DeepSeek、火山方舟、Pollo 等
-
-## 安装依赖
-
-```bash
-python -m pip install -r requirements.txt
-```
+Web 服务、聊天记录和生成文件在本机使用或保存；模型问答、搜索及媒体生成依赖外部云端 API，需要网络连接和对应凭据，可能产生调用费用。
 
 ## 启动项目
 
-```bash
-python app.py
+项目当前主要面向 Windows。建议使用独立的 Python 或 Conda 环境，并在项目目录执行：
+
+```powershell
+python -m pip install -r requirements.txt
+python main.py
 ```
 
-默认访问：
+访问 [http://127.0.0.1:5000](http://127.0.0.1:5000)。当前启动配置使用 Flask 开发服务器和 `debug=True`，仅监听本机地址；开发重载进程启动时会尝试自动打开浏览器。
 
-http://127.0.0.1:5000
+实际后端入口是 `main.py`，不是 `app.py` 或旧文件名 `PythonLangChainAI-MOD6.py`。
 
-注意：如果实际入口不是 `app.py`，请替换为对应文件名。
+`requirements.txt` 包含开发环境导出的依赖和部分指向特定机器构建目录的 `file:///` 引用。更换机器时，安装可能需要调整这些引用；其中列出的包并不都已被业务代码使用。
 
-## 使用说明
+## 工作台与会话
 
-根据使用的功能配置对应 API Key。
+- 三栏工作台：左侧会话历史、中间聊天、右侧多模态工具箱。
+- 支持浅色/深色主题、桌面和平板布局，以及手机侧边抽屉。
+- 支持新建、切换、重命名、按标题搜索、删除会话，以及导出 JSON 备份。
+- 浏览器会话保存在 `localStorage`，支持旧版 `chat_history_v1` 迁移、请求结果去重和存储异常提示。
+- Enter 发送，Shift + Enter 换行；支持中文输入法组合输入保护和提交期间防重复发送。
+- 支持图片预览、视频/音频播放、下载和媒体失效提示；消息支持普通文本和基础代码块展示。
 
-部分功能依赖互联网连接及第三方 API 服务，API 调用可能产生费用。
+浏览器多会话用于记录与展示，历史消息目前不会自动作为大模型的多轮上下文。开启“本地记忆”后，后端会读取共享的 `memory.txt` 并拼接到当前请求中。
 
-本地文件操作功能具有较高系统权限风险，请仅在可信环境中使用，并限制允许操作的目录。
+## AI 能力
 
-## 项目说明
+| 功能 | 当前实现 |
+|---|---|
+| 智能问答 | 通过 LangChain 调用 DeepSeek，当前配置模型为 `deepseek-flash` |
+| 联网检索 | 使用秘塔搜索和网页读取接口；问题包含 URL 时优先读取网页，否则搜索后读取结果正文 |
+| 角色设定 | 上传文本文件，将角色内容加入模型输入 |
+| 本地记忆 | 读取、追加和清空指定目录下的 `memory.txt`；不同浏览器会话共享该文件 |
+| 本地文件工具 | 使用 LangChain FileManagementToolkit，并提供运行本地可执行文件、PowerShell 脚本的工具 |
+| 语音输入 | 使用浏览器 `SpeechRecognition`，识别完成后提交文字；依赖浏览器支持和麦克风权限 |
+| 音色训练 | 调用豆包语音接口上传音频、查询训练状态 |
+| TTS | 将模型回复通过豆包语音接口合成为 MP3，保存本地并提供播放 |
 
-本项目在本地计算机上运行 Flask 服务，但 DeepSeek 问答、联网检索及部分多模态生成依赖外部云端 API，并非完全离线推理系统。
+本地文件工具以配置目录限制目标路径，程序和脚本通过本机进程执行；它们仍具有当前进程的系统权限，不属于隔离执行环境。当前没有本地模型推理、向量知识库或模型训练流程。
 
-本项目主要用于学习、研究与个人实验。
+## 图片生成
+
+在“图片生成”中选择模型，填写提示词，可选上传参考图，并指定图片保存目录。
+
+| 模型 | 接入方式 | 已接入参数与能力 |
+|---|---|---|
+| Seedream 5.0 Lite：`doubao-seedream-5-0-260128` | 图片服务 API | 文字生成、最多 14 张参考图、图片比例选择 |
+| Seedream 5.0 Pro：`doubao-seedream-5-0-pro-260628` | 图片服务 API | 文字生成、最多 14 张参考图、图片比例选择 |
+| `grok-imagine-image-2.0` | xAI API | 文字生成、最多 5 张输入图编辑、图片比例、1k/2k 分辨率、auto/low/medium 质量 |
+
+xAI 根据是否提供图片，分别调用图片生成或图片编辑接口。上传图片支持 PNG、JPEG、WebP；生成结果下载或解码后保存至指定本地目录。切换模型时，页面同步调整可用选项和参考图数量提示。
+
+## 视频生成
+
+在“视频生成”中选择模型和生成方式，填写提示词或图片，并按需设置时长、分辨率、音频等参数。可选项随模型和生成方式变化，后端再次校验，不能将所有模型的参数混用。
+
+| 模型 | 接入方式 | 图片输入与主要限制 |
+|---|---|---|
+| Pollo 2.5：`pollo-v2-5` | Pollo 平台 API | 文字或单张首帧图片 URL；15 秒视频必须开启音频 |
+| Kling 3.0：`kling-v3` | Pollo 平台 API | 文字或首帧图片 URL，可选尾帧 URL；时长 3–15 秒 |
+| Google Veo 3.1：`veo-3-1` | Pollo 平台 API | 文字、首帧/尾帧 URL，或 1–3 张参考图 URL；参考模式为 8 秒、720p/1080p |
+| Vidu Q3 Pro：`viduq3-pro` | Pollo 平台 API | 文字或首帧图片 URL，可选尾帧 URL；时长 1–16 秒 |
+| `grok-imagine-video-1.5` | xAI API | 文字、单张首帧图或最多 14 张参考图；1–15 秒；文字/首帧模式支持 480p、720p、原生 1080p，参考模式最高 720p |
+| `grok-imagine-video-1.5-lite` | xAI API | 文字或单张首帧图，不支持多图参考；1–15 秒；支持 480p、720p、1080p，其中 1080p 由 720p 放大 |
+
+- Pollo 平台的视频图片输入使用在线 HTTP(S) URL，当前不接收本地图片文件。
+- xAI 视频图片输入支持在线 URL 或本地上传；首帧 URL 与上传文件二选一。多图参考模式中，URL 与上传文件合计最多 14 张。
+- xAI 视频默认生成音频，可通过参数关闭；单张首帧图生视频跟随输入图片比例。
+- 视频生成采用“提交任务 → 轮询状态 → 下载保存”的流程。当前在 Flask 请求内等待完成，没有独立后台任务队列。
+
+### 视频费用预估
+
+`/video/estimate` 根据所选模型和参数进行校验与估价，不调用付费生成接口。
+
+- Pollo 估价使用 `pollo_video_pricing.json` 中的本地快照，包含当前 4 个平台模型的 390 条配置；快照读取时间为 **2026-10-14 11:39:57（UTC+08:00）**。
+- 完整采集记录见 [Pollo 视频价格表](Pollo视频价格表.md)，该文档包含当次读取的 50 个模型、1,495 种配置，不代表全部模型均已接入本项目。
+- 未公布或无法匹配的价格显示为不可验证，不按零费用处理。
+- xAI 尚未配置数值价格快照，页面显示官方价格提示。
+- 估价供提交前参考，最终费用以提供商实际结算为准。
+
+## 设置与本地保存
+
+在“设置”中填写所用功能对应的凭据：DeepSeek、秘塔、Seedream 图片服务、视频平台、xAI（Grok），以及豆包语音所需的 API Key、AppID、Token 等。图片和视频生成不要求同时填写 DeepSeek Key。
+
+设置支持保存、取消及密码显示/隐藏。密钥不写入浏览器 `localStorage` 或会话记录；当前页面和普通 POST 表单回填会保留密钥，重新打开页面或直接 GET 加载首页后需重新填写。设置保存接口不将凭据持久化到服务器配置文件。
+
+| 数据 | 当前保存位置 |
+|---|---|
+| 会话历史 | 当前浏览器 `localStorage`，键为 `lingsi_sessions_v2` |
+| 主题 | 当前浏览器 `localStorage`，键为 `lingsi_theme` |
+| 非密钥偏好 | 当前浏览器 `localStorage`，保存文件工具目录、记忆目录、System 提示词 |
+| 图片、视频 | 页面指定目录，默认 `C:\Picture&Video` |
+| TTS 音频 | `C:\Audio` |
+| 本地记忆 | 指定目录中的 `memory.txt`，默认 `C:\Memory\memory.txt` |
+| 文件工具根目录 | 默认 `C:\Script&File`，可在设置中修改 |
+
+浏览器仅记录媒体地址，不存储图片、视频或音频文件本体。文件被移动、地址过期，或服务重启导致媒体目录白名单丢失时，旧会话中的媒体可能无法访问。
+
+## 项目结构
+
+```text
+pylangchain/
+├── main.py                    # Flask 入口、Agent、模型接口、媒体保存与访问
+├── main.html                  # Jinja2 工作台模板、动态参数和语音输入逻辑
+├── static/
+│   ├── css/workbench.css      # 布局、主题与响应式样式
+│   └── js/
+│       ├── conversations.js   # 浏览器会话数据与持久化
+│       └── workbench.js       # 工作台交互、设置和结果展示
+├── pollo_video_pricing.json   # 当前平台模型的估价快照
+├── Pollo视频价格表.md          # 完整视频定价采集记录
+├── UI升级验收说明.md           # UI 升级时的验收记录，部分名称沿用当时版本
+├── requirements.txt           # Python 依赖清单
+└── README.md
+```
+
+## 技术栈与当前边界
+
+- 后端：Python、Flask、Jinja2、Requests、LangChain、langchain-deepseek。
+- 前端：原生 HTML、CSS、JavaScript、SVG、Fetch、FormData、DataTransfer 和浏览器 Web Speech API；没有 React/Vue 或前端构建流程。
+- 存储：浏览器 localStorage、本地文本/JSON 文件和媒体文件；未接入业务数据库。
+- 当前没有用户登录、角色权限、流式回复、后台任务队列、向量检索或生产部署配置。
+- 浏览器存储损坏、容量不足或检测到其他页面更新时，会提示临时内存保存；关闭页面前应导出未保存会话。当前提供备份导出，没有备份导入界面。
+- 普通表单提交返回后，浏览器不会恢复文件输入选择；需要再次使用角色文件或参考图时应重新选择。
+- 现有代码已做过参数校验、模拟服务响应、本地保存和真实浏览器检查；这些检查不代表所有在线生成服务与实体麦克风均已完成真实联调。
+
+## 官方资料
+
+- [xAI Imagine 图片与视频接口](https://docs.x.ai/developers/model-capabilities/imagine)
+- [Pollo 2.5](https://docs.pollo.ai/pollo-ai/pollo-v2-5)
+- [Kling 3.0](https://docs.pollo.ai/kling-ai/kling-v3)
+- [Google Veo 3.1](https://docs.pollo.ai/google/veo-3-1)
+- [Vidu Q3 Pro](https://docs.pollo.ai/vidu/viduq3-pro)

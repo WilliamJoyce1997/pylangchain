@@ -370,10 +370,229 @@ def estimate_pollo_video_price(model, kind, video_input):
     return result
 
 
+# xAI Imagine schemas are also rendered by the frontend. API fields remain provider-specific.
+XAI_API_BASE = "https://api.x.ai/v1"
+XAI_IMAGE_MODEL = "grok-imagine-image-2.0"
+XAI_IMAGE_RATIOS = ["auto", "1:1", "16:9", "9:16", "4:3", "3:4", "3:2", "2:3", "2:1", "1:2", "19.5:9", "9:19.5", "20:9", "9:20", "21:9", "5:2"]
+XAI_VIDEO_RATIOS = ["1:1", "16:9", "9:16", "4:3", "3:4", "3:2", "2:3", "21:9", "5:2"]
+XAI_VIDEO_MODELS = {}
+for _xai_model in ("grok-imagine-video-1.5", "grok-imagine-video-1.5-lite"):
+    _variants = {}
+    for _kind in ("text", "image", "reference"):
+        if _kind == "reference" and _xai_model.endswith("-lite"):
+            continue
+        _props = {
+            "prompt": {"type": "string"},
+            "duration": {"type": "integer", "minimum": 1, "maximum": 15, "default": 8},
+            "resolution": {"type": "string", "enum": ["480p", "720p"] if _kind == "reference" else ["480p", "720p", "1080p"], "default": "480p"},
+            "generateAudio": {"type": "boolean", "default": True},
+        }
+        if _kind != "image":
+            _props["aspectRatio"] = {"type": "string", "enum": XAI_VIDEO_RATIOS, "default": "16:9"}
+        if _kind == "image":
+            _props["image"] = {"type": "string"}
+        if _kind == "reference":
+            _props["refs"] = {"type": "array", "maxItems": 14}
+        _variants[_kind] = {"required": ["image"] if _kind == "image" else (["prompt", "refs"] if _kind == "reference" else ["prompt"]), "properties": _props}
+    XAI_VIDEO_MODELS[_xai_model] = {"label": _xai_model, "provider": "xai", "variants": _variants}
+VIDEO_MODELS = {**POLLO_VIDEO_MODELS, **XAI_VIDEO_MODELS}
+
+
+def _xai_uploaded_images(files, maximum):
+    files = [f for f in (files or []) if getattr(f, "filename", "")]
+    if len(files) > maximum:
+        raise ValueError(f"当前模型和生成方式最多支持 {maximum} 张输入图片")
+    images = []
+    for uploaded in files:
+        content = uploaded.read()
+        mime, _ = _xai_image_type(content)
+        images.append("data:" + mime + ";base64," + base64.b64encode(content).decode("ascii"))
+    return images
+
+
+def _xai_image_type(content):
+    if content.startswith(b"\x89PNG\r\n\x1a\n"):
+        return "image/png", ".png"
+    if content.startswith(b"\xff\xd8\xff"):
+        return "image/jpeg", ".jpg"
+    if content.startswith(b"RIFF") and content[8:12] == b"WEBP":
+        return "image/webp", ".webp"
+    raise ValueError("图片须为非空的 PNG、JPEG 或 WebP 文件")
+
+
+def build_xai_video_request(model, form, files=None, require_content=True):
+    if model not in XAI_VIDEO_MODELS:
+        raise ValueError("不支持的 xAI 视频模型")
+    files = files or {}
+    first_files = [f for f in files.getlist("video_image_file") if getattr(f, "filename", "")] if hasattr(files, "getlist") else []
+    ref_files = [f for f in files.getlist("video_refs_files") if getattr(f, "filename", "")] if hasattr(files, "getlist") else []
+    image = form.get("video_image_url", "").strip()
+    refs = [u.strip() for u in form.get("video_refs", "").splitlines() if u.strip()]
+    kind = form.get("video_generation_type", "auto").strip() or "auto"
+    if kind == "auto":
+        kind = "reference" if refs or ref_files else ("image" if image or first_files else "text")
+    variant = XAI_VIDEO_MODELS[model]["variants"].get(kind)
+    if not variant:
+        raise ValueError("当前模型不支持所选生成方式；Lite 仅支持文字或单张首帧图")
+    if image and first_files:
+        raise ValueError("首帧图片 URL 与上传图片只能选择一种")
+    if len(first_files) > 1:
+        raise ValueError("图生视频仅支持 1 张首帧图")
+    if kind != "image" and (image or first_files):
+        raise ValueError("当前生成方式不接受首帧图片")
+    if kind != "reference" and (refs or ref_files):
+        raise ValueError("当前生成方式不接受多张参考图")
+    if len(refs) + len(ref_files) > 14:
+        raise ValueError("参考图片总数最多为 14 张（含 URL 与上传文件）")
+    props = variant["properties"]
+    payload = {"model": model}
+    prompt = form.get("video_prompt", "").strip()
+    if prompt:
+        payload["prompt"] = prompt
+    for name in POLLO_OPTION_FIELDS:
+        raw = form.get("video_" + name, "").strip()
+        if not raw or name == "refs":
+            continue
+        spec = props.get(name)
+        if not spec:
+            raise ValueError(f"当前模型或生成方式不支持 {POLLO_OPTION_LABELS[name]}")
+        value = raw
+        if spec["type"] == "boolean":
+            if raw not in ("true", "false"):
+                raise ValueError("音频参数必须为 true 或 false")
+            value = raw == "true"
+        elif spec["type"] == "integer":
+            if not re.fullmatch(r"[0-9]+", raw) or not spec["minimum"] <= int(raw) <= spec["maximum"]:
+                raise ValueError("视频时长须为 1–15 秒的整数")
+            value = int(raw)
+        if "enum" in spec and value not in spec["enum"]:
+            raise ValueError(f"{POLLO_OPTION_LABELS[name]} 不在当前生成方式允许的选项中")
+        payload[{"aspectRatio": "aspect_ratio", "generateAudio": "generate_audio"}.get(name, name)] = value
+    if form.get("video_webhookUrl", "").strip():
+        raise ValueError("xAI 不使用此回调参数")
+    if kind == "image":
+        urls = _xai_uploaded_images(first_files, 1)
+        if image:
+            urls.append(_validate_pollo_url(image, "首帧图片 URL"))
+        if urls:
+            payload["image"] = {"url": urls[0]}
+    elif kind == "reference":
+        urls = [_validate_pollo_url(u, "参考图片 URL") for u in refs] + _xai_uploaded_images(ref_files, 14)
+        if urls:
+            payload["reference_images"] = [{"url": u} for u in urls]
+    if require_content:
+        for required in variant["required"]:
+            if not payload.get({"refs": "reference_images"}.get(required, required)):
+                raise ValueError("请填写当前生成方式所需的提示文本或图片")
+    return payload, kind
+
+
+def build_xai_image_request(form, files):
+    prompt = form.get("image_prompt", "").strip()
+    if not prompt:
+        raise ValueError("图像提示文本不能为空")
+    payload = {"model": XAI_IMAGE_MODEL, "prompt": prompt, "response_format": "b64_json"}
+    ratio = form.get("img_ratio", "").strip()
+    if ratio:
+        if ratio not in XAI_IMAGE_RATIOS:
+            raise ValueError("不支持的图片比例")
+        payload["aspect_ratio"] = ratio
+    for name, allowed in (("resolution", ("1k", "2k")), ("quality", ("auto", "low", "medium"))):
+        value = form.get("xai_image_" + name, "").strip()
+        if value:
+            if value not in allowed:
+                raise ValueError("不支持的图片" + name)
+            payload[name] = value
+    images = _xai_uploaded_images(files, 5)
+    endpoint = "/images/generations"
+    if images:
+        endpoint = "/images/edits"
+        if len(images) == 1:
+            payload["image"] = {"type": "image_url", "url": images[0]}
+        else:
+            payload["images"] = [{"type": "image_url", "url": u} for u in images]
+    return endpoint, payload
+
+
+def _xai_json(method, endpoint, key, payload=None):
+    response = requests.request(method, XAI_API_BASE + endpoint,
+        headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
+        **({"json": payload} if payload is not None else {}), timeout=180)
+    if not response.ok:
+        # Do not echo credentials or upstream request payloads into history.
+        raise ValueError(f"xAI 请求失败（HTTP {response.status_code}），请检查密钥、额度及输入参数")
+    data = response.json()
+    if not isinstance(data, dict):
+        raise ValueError("xAI 返回了无法识别的结果")
+    return data
+
+
+def _save_xai_media(content, directory, extension):
+    if not content:
+        raise ValueError("生成结果为空，未保存文件")
+    path = os.path.join(directory, "grok_" + uuid.uuid4().hex + extension)
+    with open(path, "wb") as output:
+        output.write(content)
+    return path
+
+
+def generate_xai_media(kind, key, directory, payload, endpoint=None):
+    if not key:
+        raise ValueError("xAI (Grok) API Key 不能为空")
+    # Verify the destination before creating a billable task.
+    os.makedirs(directory, exist_ok=True)
+    if not os.path.isdir(directory) or not os.access(directory, os.W_OK):
+        raise ValueError("无法写入指定的媒体保存目录")
+    ALLOWED_MEDIA_DIRS.add(os.path.abspath(directory))
+    data = _xai_json("POST", endpoint if kind == "image" else "/videos/generations", key, payload)
+    if kind == "image":
+        paths = []
+        for image in data.get("data", []):
+            if image.get("respect_moderation") is False:
+                raise ValueError("图片未通过内容审核")
+            if image.get("b64_json"):
+                content = base64.b64decode(image["b64_json"], validate=True)
+            elif image.get("url"):
+                download = requests.get(_validate_pollo_url(image["url"], "图片下载地址"), timeout=120)
+                download.raise_for_status()
+                content = download.content
+            else:
+                raise ValueError("图片返回结果缺少图片数据")
+            _, extension = _xai_image_type(content)
+            paths.append(_save_xai_media(content, directory, extension))
+        if not paths:
+            raise ValueError("xAI 未返回可保存的图片")
+        return paths
+    task = data.get("request_id")
+    if not isinstance(task, str) or not task:
+        raise ValueError("xAI 未返回视频任务 ID")
+    deadline = time.monotonic() + 600
+    while time.monotonic() < deadline:
+        result = _xai_json("GET", "/videos/" + urllib.parse.quote(task, safe=""), key)
+        status = result.get("status")
+        if status == "done":
+            video = result.get("video") or {}
+            if video.get("respect_moderation") is False:
+                raise ValueError("视频未通过内容审核")
+            url = _validate_pollo_url(video.get("url", ""), "视频下载地址")
+            download = requests.get(url, timeout=180)
+            download.raise_for_status()
+            return [_save_xai_media(download.content, directory, ".mp4")]
+        if status in ("failed", "expired"):
+            raise ValueError(f"视频任务{status}，任务 ID：{task}")
+        if status not in ("pending", "processing", "queued"):
+            raise ValueError(f"视频任务返回未知状态，任务 ID：{task}")
+        time.sleep(5)
+    raise ValueError(f"视频仍在生成，等待已超时。任务 ID：{task}；请勿重复提交同一任务")
+
+
 @app.route("/video/estimate", methods=["POST"])
 def video_estimate():
     model = request.form.get("video_model", "").strip() or "pollo-v2-5"
     try:
+        if model in XAI_VIDEO_MODELS:
+            build_xai_video_request(model, request.form, require_content=False)
+            return {"usd": None, "message": "xAI 费用请以官方价格页及实际结算为准，当前未配置价格快照", "source": "https://docs.x.ai/developers/pricing"}
         payload, kind = build_pollo_video_request(model, request.form, require_content=False)
         return estimate_pollo_video_price(model, kind, payload["input"])
     except ValueError as error:
@@ -480,7 +699,11 @@ def index():
         "base_dir": "",
         "pollo_key": "",
         "video_model": "pollo-v2-5",
-        "video_models": POLLO_VIDEO_MODELS,
+        "video_models": VIDEO_MODELS,
+        "xai_key": "",
+        "xai_image_ratios": XAI_IMAGE_RATIOS,
+        "xai_image_resolution": "",
+        "xai_image_quality": "",
         "video_option_labels": POLLO_OPTION_LABELS,
         "video_generation_type": "auto",
         "video_options": {name: "" for name in POLLO_OPTION_FIELDS},
@@ -525,6 +748,7 @@ def index():
         system_prompt_input = request.form.get('system_prompt', '').strip()
 
         # Video inputs; optional settings are validated against the selected model schema.
+        xai_key = request.form.get("xai_key", "").strip()
         pollo_key = request.form.get('pollo_key', '').strip()
         video_model = request.form.get('video_model', '').strip() or "pollo-v2-5"
         video_prompt = request.form.get('video_prompt', '').strip()
@@ -568,6 +792,9 @@ def index():
             "enable_persona": use_persona,
             "enable_memory": use_memory,
             "memory_path": memory_path,
+            "xai_key": xai_key,
+            "xai_image_resolution": request.form.get("xai_image_resolution", "").strip(),
+            "xai_image_quality": request.form.get("xai_image_quality", "").strip(),
             "pollo_key": pollo_key,
             "video_model": video_model,
             "video_generation_type": request.form.get("video_generation_type", "auto").strip() or "auto",
@@ -703,7 +930,18 @@ def index():
         # ----------------- 图片生成（Ark）优先检测并处理 -----------------
         want_image = bool(send_image)
 
+        if want_image and ark_model == XAI_IMAGE_MODEL:
+            try:
+                endpoint, payload = build_xai_image_request(request.form, img2img_files)
+                paths = generate_xai_media("image", xai_key, image_media_dir, payload, endpoint)
+                form_values["media_images"] = [_build_media_url(path) for path in paths]
+                return render_template('main.html', answer="✅ 图片生成完成，已保存：\n" + "\n".join(paths), **form_values)
+            except Exception as error:
+                return render_template('main.html', answer=f"❌ 图片生成失败：{error}", **form_values)
+
         if want_image:
+            if ark_model not in ("doubao-seedream-5-0-260128", "doubao-seedream-5-0-pro-260628"):
+                return render_template('main.html', answer="❌ 不支持的图片模型", **form_values)
             if not ark_key:
                 answer = "❌ 火山引擎 API Key 不能为空"
                 return render_template('main.html', answer=answer, **form_values)
@@ -816,7 +1054,18 @@ def index():
                 answer = f"❌ 图片生成出错: {e}\n\ntraceback:\n{tb}"
                 return render_template('main.html', answer=answer, **form_values)
 
+        if send_video and video_model in XAI_VIDEO_MODELS:
+            try:
+                payload, generation_kind = build_xai_video_request(video_model, request.form, request.files)
+                paths = generate_xai_media("video", xai_key, media_dir, payload)
+                form_values["media_videos"] = [_build_media_url(path) for path in paths]
+                return render_template('main.html', answer="✅ 视频生成完成，已保存：\n" + "\n".join(paths), **form_values)
+            except Exception as error:
+                return render_template('main.html', answer=f"❌ 视频生成失败：{error}", **form_values)
+
         if send_video:
+            if any(getattr(f, "filename", "") for name in ("video_image_file", "video_refs_files") for f in request.files.getlist(name)):
+                return render_template('main.html', answer="❌ 当前视频模型仅支持在线图片 URL", **form_values)
             if not pollo_key:
                 return render_template('main.html', answer="❌ Pollo API Key 不能为空", **form_values)
             try:
