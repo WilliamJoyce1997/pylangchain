@@ -114,14 +114,15 @@
                             <h3>图片生成</h3>
                             <label>模型（可选）:
                                 <select name="ark_model" id="image_model">
-                                    <option value="grok-imagine-image-2.0" {% if ark_model == 'grok-imagine-image-2.0' %}selected{% endif %}>grok-imagine-image-2.0</option>
+                                    <option value="nano-banana-2-1" {% if ark_model == 'nano-banana-2-1' %}selected{% endif %}>Nano Banana 2.1</option>
+                                    <option value="grok-imagine-image-2.0" {% if ark_model == 'grok-imagine-image-2.0' %}selected{% endif %}>Grok Imagine Image 2.0</option>
                                     <option value="doubao-seedream-5-0-260128"
                                         {% if ark_model == 'doubao-seedream-5-0-260128' or not ark_model %}selected{% endif %}>
-                                        Seedream5.0lite
+                                        Seedream 5.0 lite
                                     </option>
                                     <option value="doubao-seedream-5-0-pro-260628"
                                         {% if ark_model == 'doubao-seedream-5-0-pro-260628' %}selected{% endif %}>
-                                        Seedream5.0pro
+                                        Seedream 5.0 pro
                                     </option>
                                 </select>
                             </label>
@@ -130,12 +131,19 @@
                                 <textarea name="image_prompt" rows="3" cols="60" placeholder="请输入图像生成的提示词">{{ image_prompt }}</textarea>
                             </label>
 
-                            <label><span id="image_reference_hint">图生图（可选：最多 14 张）</span>:
+                            <label id="image_upload_field"><span id="image_reference_hint">图生图（可选：最多 14 张）</span>:
                                 <input type="file" name="img2img_file" id="img2img_file" accept="image/*" multiple>
                                 <span id="img2img_file_list" style="margin-left:8px; color:#555;">{{ img2img_file if img2img_file else '' }}</span>
                             </label>
 
                             <button type="button" id="clear_image_refs">清空参考图</button>
+                            <div id="nano_image_options" hidden>
+                                <p class="small">使用设置中的 Pollo 图片/视频平台 API Key。参考图只接受在线 JPG/JPEG、PNG 图片 URL，不支持上传文件或 Base64。</p>
+                                <label>参考图片 URL（可选，每行一张，最多 {{ nano_image_schema.maxReferences }} 张）：<textarea name="nano_images" id="nano_images" rows="3" placeholder="https://example.com/reference.png" disabled>{{ nano_images }}</textarea></label>
+                                {% for name, spec in nano_image_schema.options.items() %}
+                                <label>{{ spec.label }}：<select name="nano_{{ name }}" id="nano_{{ name }}" disabled><option value="">默认（{{ spec.default }}）</option>{% for value in spec.enum %}<option value="{{ value }}" {% if nano_options[name] == value %}selected{% endif %}>{{ value }}</option>{% endfor %}</select></label>
+                                {% endfor %}
+                            </div>
                             <div id="xai_image_options" hidden>
                                 <label>分辨率：<select name="xai_image_resolution" id="xai_image_resolution" disabled><option value="">默认（1k）</option>{% for value in ['1k', '2k'] %}<option value="{{ value }}" {% if xai_image_resolution == value %}selected{% endif %}>{{ value }}</option>{% endfor %}</select></label>
                                 <label>质量：<select name="xai_image_quality" id="xai_image_quality" disabled><option value="">默认（auto）</option>{% for value in ['auto', 'low', 'medium'] %}<option value="{{ value }}" {% if xai_image_quality == value %}selected{% endif %}>{{ value }}</option>{% endfor %}</select></label>
@@ -181,7 +189,7 @@
 <label>豆包 AppID<span class="password-wrap"><input autocomplete="off" type="text" name="doubao_appid" value="{{ doubao_appid }}" ></span></label>
 <label>Seedream 图片 API Key<span class="password-wrap"><input autocomplete="off" type="password" name="ark_key" value="{{ ark_key }}" data-secret><button type="button" data-password-toggle aria-label="显示Seedream 图片 API Key"><svg class="icon" aria-hidden="true"><use href="#icon-eye"></use></svg></button></span></label>
 <label>xAI (Grok) API Key<span class="password-wrap"><input autocomplete="off" type="password" name="xai_key" value="{{ xai_key }}" data-secret><button type="button" data-password-toggle aria-label="显示 xAI API Key"><svg class="icon" aria-hidden="true"><use href="#icon-eye"></use></svg></button></span></label>
-<label>视频平台 API Key<span class="password-wrap"><input autocomplete="off" type="password" name="pollo_key" value="{{ pollo_key }}" data-secret><button type="button" data-password-toggle aria-label="显示视频平台 API Key"><svg class="icon" aria-hidden="true"><use href="#icon-eye"></use></svg></button></span></label>
+<label>Pollo 图片/视频平台 API Key<span class="password-wrap"><input autocomplete="off" type="password" name="pollo_key" value="{{ pollo_key }}" data-secret><button type="button" data-password-toggle aria-label="显示 Pollo 图片/视频平台 API Key"><svg class="icon" aria-hidden="true"><use href="#icon-eye"></use></svg></button></span></label>
 <p class="notice">密钥仅保留在当前页面内存及表单回填中，不会保存到浏览器历史或 localStorage。直接刷新或重新打开页面后需重新填写。</p></div>
 <div class="settings-fields hidden" data-settings-page="local">
 <label>本地文件操作根目录<input type="text" name="base_dir" placeholder="C:\Script&File" value="{{ base_dir }}"></label>
@@ -476,16 +484,26 @@
 
         const imageModel = document.getElementById('image_model');
         const imageRatios = {{ xai_image_ratios | tojson }};
+        const nanoImageSchema = {{ nano_image_schema | tojson }};
         const originalRatios = [...document.querySelector('[name="img_ratio"]').options].map(option => option.value);
         function updateImageModel(preferredRatio) {
             const xai = imageModel.value === 'grok-imagine-image-2.0';
+            const nano = imageModel.value === 'nano-banana-2-1';
+            document.getElementById('nano_image_options').hidden = !nano;
+            document.querySelectorAll('#nano_image_options [name]').forEach(input => input.disabled = !nano);
+            document.getElementById('image_upload_field').hidden = nano;
+            img2imgInput.disabled = nano;
+            document.getElementById('clear_image_refs').hidden = nano;
+            const prompt = document.querySelector('[name="image_prompt"]');
+            if (nano) prompt.maxLength = nanoImageSchema.promptMaxLength;
+            else prompt.removeAttribute('maxlength');
             document.getElementById('image_reference_hint').textContent = '图生图（可选：上传 PNG/JPEG/WebP，最多 ' + (xai ? 5 : 14) + ' 张）';
             document.getElementById('xai_image_options').hidden = !xai;
             document.getElementById('xai_image_resolution').disabled = !xai;
             document.getElementById('xai_image_quality').disabled = !xai;
             const ratio = document.querySelector('[name="img_ratio"]');
             const selected = typeof preferredRatio === 'string' ? preferredRatio : ratio.value;
-            ratio.replaceChildren(...(xai ? imageRatios : originalRatios).map(value => new Option(value, value)));
+            ratio.replaceChildren(...(nano ? nanoImageSchema.aspectRatio : xai ? imageRatios : originalRatios).map(value => new Option(value, value)));
             ratio.value = [...ratio.options].some(option => option.value === selected) ? selected : '1:1';
         }
         imageModel.addEventListener('change', updateImageModel);

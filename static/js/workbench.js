@@ -229,7 +229,7 @@
     }
     function validateSubmission(button) {
         const action=button?.name||'chat';
-        const required=action==='send_image' ? [form.elements.namedItem('ark_model').value === 'grok-imagine-image-2.0' ? 'xai_key' : 'ark_key','image_prompt'] :
+        const required=action==='send_image' ? [form.elements.namedItem('ark_model').value === 'nano-banana-2-1' ? 'pollo_key' : form.elements.namedItem('ark_model').value === 'grok-imagine-image-2.0' ? 'xai_key' : 'ark_key','image_prompt'] :
             action==='send_video' ? [form.elements.namedItem('video_model').value.startsWith('grok-imagine-') ? 'xai_key' : 'pollo_key'] :
             ['voice_upload','check_voice_status'].includes(action) ? ['doubao_token','doubao_appid','voice_speaker_id'] :
             action==='clear_memory' ? [] : ['deepseek_key','query'];
@@ -243,8 +243,17 @@
             }
         }
         if(action==='send_image') {
+            const nano=form.elements.namedItem('ark_model').value==='nano-banana-2-1';
+            if(nano) {
+                const urls=$('nano_images').value.split(/\r?\n/).map(value=>value.trim()).filter(Boolean);
+                if(urls.length>nanoImageSchema.maxReferences){toast('Nano Banana 2.1 最多支持 '+nanoImageSchema.maxReferences+' 张参考图。');return false;}
+                if(urls.some(value=>{try{const url=new URL(value);return !['http:','https:'].includes(url.protocol)||!url.hostname||/\s/.test(value);}catch(_){return true;}})){toast('参考图片须填写有效的在线 HTTP(S) URL，不支持 Base64。');return false;}
+                if(form.elements.namedItem('image_prompt').value.trim().length>nanoImageSchema.promptMaxLength){toast('Nano Banana 2.1 提示词最多 '+nanoImageSchema.promptMaxLength+' 个字符。');return false;}
+            }
+            const invalid=[...$('section_image').querySelectorAll('input,textarea,select')].find(input=>!input.disabled&&!input.checkValidity());
+            if(invalid){invalid.reportValidity();return false;}
             const maximum=form.elements.namedItem('ark_model').value==='grok-imagine-image-2.0'?5:14;
-            if($('img2img_file').files.length>maximum){toast('当前图片模型最多支持 '+maximum+' 张参考图，请清空后重新选择。');return false;}
+            if(!$('img2img_file').disabled&&$('img2img_file').files.length>maximum){toast('当前图片模型最多支持 '+maximum+' 张参考图，请清空后重新选择。');return false;}
         }
         if(action==='send_video') {
             const xai=form.elements.namedItem('video_model').value.startsWith('grok-imagine-');

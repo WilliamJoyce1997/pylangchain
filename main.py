@@ -370,6 +370,97 @@ def estimate_pollo_video_price(model, kind, video_input):
     return result
 
 
+# Nano Banana 2.1: official Pollo schema, also used to render image controls.
+NANO_IMAGE_MODEL = "nano-banana-2-1"
+NANO_IMAGE_SCHEMA = {
+    "maxReferences": 14, "promptMaxLength": 20000,
+    "aspectRatio": ["1:1", "9:16", "16:9", "4:3", "3:4", "3:2", "2:3", "5:4", "4:5", "21:9", "1:4", "4:1", "8:1", "1:8"],
+    "options": {
+        "resolution": {"label": "分辨率", "enum": ["1K", "2K", "4K"], "default": "1K"},
+        "thinkingLevel": {"label": "思考级别", "enum": ["minimal", "medium", "high"], "default": "minimal"},
+    },
+}
+
+
+def build_nano_image_request(form, files=None):
+    if any(getattr(f, "filename", "") for f in (files or [])):
+        raise ValueError("Nano Banana 2.1 仅接受在线参考图片 URL，不支持本地上传或 Base64")
+    prompt = form.get("image_prompt", "").strip()
+    if not 1 <= len(prompt) <= NANO_IMAGE_SCHEMA["promptMaxLength"]:
+        raise ValueError("Nano Banana 2.1 提示词须为 1–20000 个字符")
+    image_input = {"prompt": prompt}
+    ratio = form.get("img_ratio", "").strip()
+    if ratio:
+        if ratio not in NANO_IMAGE_SCHEMA["aspectRatio"]:
+            raise ValueError("Nano Banana 2.1 不支持当前图片比例")
+        image_input["aspectRatio"] = ratio
+    for name, spec in NANO_IMAGE_SCHEMA["options"].items():
+        value = form.get("nano_" + name, "").strip()
+        if not value:
+            continue
+        if name == "resolution":
+            value = value.upper()
+        if value not in spec["enum"]:
+            raise ValueError("Nano Banana 2.1 不支持当前" + spec["label"])
+        image_input[name] = value
+    urls = [line.strip() for line in form.get("nano_images", "").splitlines() if line.strip()]
+    if len(urls) > NANO_IMAGE_SCHEMA["maxReferences"]:
+        raise ValueError("Nano Banana 2.1 最多支持 14 张参考图，每行一个 URL")
+    if urls:
+        image_input["images"] = [_validate_pollo_url(url, "参考图片 URL") for url in urls]
+    if any(form.get(name, "").strip() for name in ("xai_image_resolution", "xai_image_quality")):
+        raise ValueError("Nano Banana 2.1 不支持 xAI 图片参数")
+    return {"input": image_input}
+
+
+def generate_nano_images(key, directory, payload):
+    if not key:
+        raise ValueError("请在设置中填写 Pollo API Key（供图片/视频平台共用）")
+    # Check the destination before submitting a billable generation.
+    os.makedirs(directory, exist_ok=True)
+    if not os.path.isdir(directory) or not os.access(directory, os.W_OK):
+        raise ValueError("无法写入指定图片保存目录")
+    ALLOWED_MEDIA_DIRS.add(os.path.abspath(directory))
+    headers = {"x-api-key": key, "Content-Type": "application/json"}
+    response = requests.post(POLLO_API_BASE + "/generation/google/nano-banana-2-1/image",
+                             headers=headers, json=payload, timeout=60)
+    if not response.ok:
+        raise ValueError(f"图片生成请求失败（HTTP {response.status_code}），请检查密钥、额度及参数")
+    task_data = response.json()
+    task_id, status, _ = _extract_task_id_from_resp(task_data)
+    if not isinstance(task_id, str) or not task_id:
+        raise ValueError("图片生成响应缺少任务 ID")
+    if status == "failed":
+        raise ValueError(f"图片生成失败，任务 ID：{task_id}")
+    status_url = POLLO_API_BASE + "/generation/" + urllib.parse.quote(task_id, safe="") + "/status"
+    deadline = time.monotonic() + 600
+    while time.monotonic() < deadline:
+        response = requests.get(status_url, headers={"x-api-key": key}, timeout=30)
+        if not response.ok:
+            raise ValueError(f"图片任务查询失败（HTTP {response.status_code}），任务 ID：{task_id}")
+        generations = _extract_generations_from_status_resp(response.json())
+        if any(g.get("status") == "failed" for g in generations):
+            raise ValueError(f"图片生成失败，任务 ID：{task_id}")
+        if generations and all(g.get("status") == "succeed" for g in generations):
+            paths = []
+            for generated in generations:
+                if generated.get("mediaType") != "image" or not generated.get("url"):
+                    raise ValueError(f"任务未返回有效图片，任务 ID：{task_id}")
+                url = _validate_pollo_url(generated["url"], "图片下载 URL")
+                download = requests.get(url, timeout=120)
+                download.raise_for_status()
+                _, extension = _xai_image_type(download.content)
+                path = os.path.join(directory, "nano_" + uuid.uuid4().hex + extension)
+                with open(path, "wb") as output:
+                    output.write(download.content)
+                paths.append(path)
+            return paths
+        if any(g.get("status") not in ("waiting", "processing", "succeed") for g in generations):
+            raise ValueError(f"图片任务返回未知状态，任务 ID：{task_id}")
+        time.sleep(5)
+    raise ValueError(f"图片任务等待超时，任务 ID：{task_id}；请勿重复提交同一任务")
+
+
 # xAI Imagine schemas are also rendered by the frontend. API fields remain provider-specific.
 XAI_API_BASE = "https://api.x.ai/v1"
 XAI_IMAGE_MODEL = "grok-imagine-image-2.0"
@@ -702,6 +793,9 @@ def index():
         "video_models": VIDEO_MODELS,
         "xai_key": "",
         "xai_image_ratios": XAI_IMAGE_RATIOS,
+        "nano_image_schema": NANO_IMAGE_SCHEMA,
+        "nano_images": "",
+        "nano_options": {name: "" for name in NANO_IMAGE_SCHEMA["options"]},
         "xai_image_resolution": "",
         "xai_image_quality": "",
         "video_option_labels": POLLO_OPTION_LABELS,
@@ -806,6 +900,8 @@ def index():
             "ark_key": ark_key,
             "image_prompt": image_prompt,
             "ark_model": ark_model,
+            "nano_images": request.form.get("nano_images", "").strip(),
+            "nano_options": {name: request.form.get("nano_" + name, "").strip() for name in NANO_IMAGE_SCHEMA["options"]},
             "img_ratio": img_ratio,
             "image_media_dir": image_media_dir,
             "img2img_file": ",".join([getattr(f, "filename", "") for f in img2img_files if getattr(f, "filename", "")]),
@@ -929,6 +1025,15 @@ def index():
 
         # ----------------- 图片生成（Ark）优先检测并处理 -----------------
         want_image = bool(send_image)
+
+        if want_image and ark_model == NANO_IMAGE_MODEL:
+            try:
+                payload = build_nano_image_request(request.form, img2img_files)
+                paths = generate_nano_images(pollo_key, image_media_dir, payload)
+                form_values["media_images"] = [_build_media_url(path) for path in paths]
+                return render_template('main.html', answer="✅ 图片生成完成，已保存：\n" + "\n".join(paths), **form_values)
+            except Exception as error:
+                return render_template('main.html', answer=f"❌ 图片生成失败：{error}", **form_values)
 
         if want_image and ark_model == XAI_IMAGE_MODEL:
             try:
