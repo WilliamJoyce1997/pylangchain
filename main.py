@@ -1,9 +1,27 @@
 # coding: utf-8
+import os
+import subprocess
+import sys
+from pathlib import Path
+
+if __name__ == "__main__" and sys.version_info < (3, 11):
+    project_venv = Path(__file__).resolve().with_name(".venv")
+    python_path = "Scripts/python.exe" if os.name == "nt" else "bin/python"
+    venv_python = project_venv / python_path
+    if not venv_python.is_file() or Path(sys.prefix).resolve() == project_venv.resolve():
+        raise SystemExit("当前 Python 无法运行项目依赖。请按 README.md 配置 Python 3.12 的 .venv。")
+    try:
+        original_args = getattr(sys, "orig_argv", [sys.executable, *sys.argv])
+        raise SystemExit(subprocess.call([str(venv_python), *original_args[1:]]))
+    except KeyboardInterrupt:
+        raise SystemExit(130) from None
+    except OSError as exc:
+        raise SystemExit(f"无法启动项目虚拟环境。请按 README.md 重建 .venv。\n{exc}") from None
+
 from flask import Flask, render_template, request, send_file, session
 from deepseek_extensions import (DeepSeekChat as ChatDeepSeek, DeepSeekAPI, DeepSeekError,
     init_deepseek, deepseek_context, make_deepseek_tools, tool_summary, AGENT_RULES)
 import requests, re, traceback
-import os, sys, subprocess
 import uuid
 import urllib.parse
 from langchain_community.agent_toolkits.file_management.toolkit import FileManagementToolkit

@@ -16,6 +16,8 @@ Set-Location -LiteralPath 'D:\Projects\pylangchain-py312'
 & '.\.venv\Scripts\python.exe' -B main.py
 ```
 
+依赖安装完成后，也可在项目根目录运行 `python .\main.py`。如果该命令使用 Python 3.10 或更早的解释器，启动入口会转用项目的 `.venv`。
+
 打开 [http://127.0.0.1:5000](http://127.0.0.1:5000)。`main.py` 会尝试自动打开浏览器。Flask 开发服务器仅监听本机，调试器及热重载默认关闭。同一端口只运行一个版本。
 
 希望同时验证两个版本时，可用下面的命令将升级版启动到独立端口。浏览器按来源隔离 `localStorage`，更换端口会显示独立的会话列表。使用原浏览器配置和原地址可以继续读取原历史。
