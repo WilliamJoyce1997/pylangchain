@@ -1,6 +1,7 @@
 # coding: utf-8
-from flask import Flask, render_template, request, send_file
-from langchain_deepseek import ChatDeepSeek
+from flask import Flask, render_template, request, send_file, session
+from deepseek_extensions import (DeepSeekChat as ChatDeepSeek, DeepSeekAPI, DeepSeekError,
+    init_deepseek, deepseek_context, make_deepseek_tools, tool_summary, AGENT_RULES)
 import requests, re, traceback
 import os, sys, subprocess
 import uuid
@@ -14,6 +15,7 @@ import time
 import json
 
 app = Flask(__name__, template_folder='.')
+deepseek_state = init_deepseek(app)
 ALLOWED_MEDIA_DIRS = set()
 
 URL_RE = re.compile(r'https?://[^\s\'\"<>\)\]\[]+', re.IGNORECASE)
@@ -26,46 +28,6 @@ def extract_urls(text, max_urls=5):
         if len(out) >= max_urls:
             break
     return out
-
-def metaso_reader_single(url, api_key):
-    try:
-        reader_url = "https://metaso.cn/api/v1/reader"
-        headers = {"Authorization": f"Bearer {api_key}", "Accept": "text/plain", "Content-Type": "application/json"}
-        payload = {"url": url, "format": "markdown"}
-        r = requests.post(reader_url, headers=headers, json=payload, timeout=30)
-        r.raise_for_status()
-        content = r.text or ""
-        if not content.strip():
-            return f"【警告】获取到的内容为空，URL: {url}"
-        return content
-    except Exception as e:
-        return f"【错误】处理URL时出错: {e}"
-
-def metaso_search_and_reader(query, api_key):
-    try:
-        resp = requests.post(
-            "https://metaso.cn/api/v1/search",
-            headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
-            json={"q": query, "scope": "webpage", "size": 20, "includeSummary": False, "includeRawContent": False, "format": "chat_completions"},
-            timeout=30
-        )
-        resp.raise_for_status()
-        data = resp.json()
-        webpages = data.get("webpages", []) or []
-        filtered = [w for w in webpages if "bilibili.com" not in (w.get("link") or "").lower()]
-        top_links = filtered[:10]
-        results_text = "【联网搜索结果】\n"
-        for i, item in enumerate(top_links, 1):
-            link = item.get("link", "")
-            title = item.get("title", "无标题")
-            date = item.get("date", "")
-            results_text += f"\n{i}. 标题: {title}\n日期: {date}\n来源: {link}\n正文:\n"
-            if link:
-                content = metaso_reader_single(link, api_key)
-                results_text += content + "\n"
-        return results_text
-    except Exception as e:
-        return f"【错误】搜索失败: {e}"
 
 def make_safe_path(base_dir: str, path: str) -> str:
     if not path:
@@ -766,8 +728,8 @@ TTS_AUDIO_DIR = r"C:\Audio"
 def index():
     answer = ""
     form_values = {
+        **deepseek_context(),
         "deepseek_key": "",
-        "metaso_key": "",
         "asr_ark_key": "",
         "doubao_token": "",
         "doubao_appid": "",
@@ -819,12 +781,11 @@ def index():
 
     if request.method == 'POST':
         # UI metadata only routes the rendered result; it is never model context.
-        ui_session_id = re.sub(r"[^a-zA-Z0-9_-]", "", request.form.get("ui_session_id", ""))[:128]
+        ui_session_id = re.sub(r"[^a-zA-Z0-9_-]", "", request.form.get("ui_session_id", ""))[:128] or uuid.uuid4().hex
         ui_request_id = re.sub(r"[^a-zA-Z0-9_-]", "", request.form.get("ui_request_id", ""))[:128] or uuid.uuid4().hex
         ui_action = next((name for name in ("save_settings", "clear_memory", "voice_upload", "check_voice_status", "send_image", "send_video") if name in request.form), "chat")
         # common fields
         deepseek_key = request.form.get('deepseek_key', '').strip()
-        metaso_key = request.form.get('metaso_key', '').strip()
         base_dir = request.form.get('base_dir', '').strip()
         user_query = request.form.get('query', '').strip()
         use_network = 'enable_network' in request.form
@@ -869,7 +830,6 @@ def index():
             "ui_request_id": ui_request_id,
             "ui_action": ui_action,
             "deepseek_key": deepseek_key,
-            "metaso_key": metaso_key,
             "asr_ark_key": asr_ark_key,
             "doubao_token": doubao_token,
             "doubao_appid": doubao_appid,
@@ -908,6 +868,16 @@ def index():
             "media_images": [],
             "media_videos": []
         })
+
+        # Preserve Chat references through unrelated ordinary form submissions.
+        if ui_action != "chat" and deepseek_key:
+            try:
+                saved_chat_ids = json.loads(request.form.get("chat_file_ids", "[]"))
+                form_values["chat_attachments"] = deepseek_state.references(
+                    session["deepseek_owner"], ui_session_id, deepseek_key, saved_chat_ids)
+                form_values["chat_file_ids"] = json.dumps(saved_chat_ids)
+            except (ValueError, TypeError):
+                pass
 
         if "save_settings" in request.form:
             # The same form fields are accepted without an LLM call or filesystem write.
@@ -1313,7 +1283,14 @@ def index():
 
         # init LLM
         try:
-            llm = ChatDeepSeek(model="deepseek-flash", api_key=deepseek_key)
+            chat_ids = json.loads(request.form.get("chat_file_ids", "[]"))
+            attachments = deepseek_state.references(session["deepseek_owner"], ui_session_id, deepseek_key, chat_ids)
+            form_values["chat_attachments"] = attachments
+            form_values["chat_file_ids"] = json.dumps(chat_ids)
+            if attachments and not user_query:
+                user_query = "请分析附件图片。"
+                form_values["query"] = user_query
+            llm = ChatDeepSeek(model="deepseek-flash", api_key=deepseek_key, chat_file_ids=chat_ids)
         except Exception as e:
             answer = f"❌ 初始化 DeepSeek LLM 失败: {e}"
             return render_template('main.html', answer=answer, **form_values)
@@ -1399,11 +1376,15 @@ def index():
                     "返回执行的 stdout 或错误信息。"
                 )
             )
-            selected_tools = file_tools + [run_exe_tool, run_ps1_tool]
+            cloud_tools, cloud_pending, cloud_events, web_sources = make_deepseek_tools(
+                DeepSeekAPI(deepseek_key), deepseek_state, session["deepseek_owner"], ui_session_id, use_network)
+            form_values["cloud_pending"] = cloud_pending
+            selected_tools = file_tools + [run_exe_tool, run_ps1_tool] + cloud_tools
             if selected_tools:
                 agent_executor = initialize_agent(selected_tools, llm,
                                                   agent=AgentType.STRUCTURED_CHAT_ZERO_SHOT_REACT_DESCRIPTION,
-                                                  verbose=False)
+                                                  verbose=False,
+                                                  agent_kwargs={"prefix": (AGENT_RULES + "\n" + system_prompt_input).replace("{", "{{").replace("}", "}}")})
             else:
                 agent_executor = None
         except Exception as e:
@@ -1415,21 +1396,6 @@ def index():
         if persona_text:
             system_prompt += "\n根据以下内容严格进行角色扮演：\n" + persona_text
 
-        # extra_context (network)
-        extra_context = ""
-        if use_network:
-            if not metaso_key:
-                extra_context = "【提示】已选择启用联网，但未填写秘塔 API Key，联网功能将被跳过。\n"
-            else:
-                urls = extract_urls(user_query, max_urls=5)
-                if urls:
-                    extra_context = "【联网读取结果】\n"
-                    for i, u in enumerate(urls, 1):
-                        content = metaso_reader_single(u, metaso_key)
-                        extra_context += f"\n{i}. 来源: {u}\n{content}\n"
-                else:
-                    extra_context = metaso_search_and_reader(user_query, metaso_key)
-
         # final input composition
         final_input = ""
         if memory_text:
@@ -1437,8 +1403,6 @@ def index():
         if persona_text:
             final_input += persona_text + "\n\n"
         final_input += user_query
-        if extra_context:
-            final_input += "\n\n（以下是联网获取的信息）\n" + extra_context
 
         final_input = system_prompt + "\n\n" + final_input
 
@@ -1451,12 +1415,12 @@ def index():
                 resp = llm.invoke([{"role": r, "content": c} for r, c in formatted])
                 answer_text = getattr(resp, "content", None) or getattr(resp, "text", None) or str(resp)
 
+            summary = tool_summary(cloud_events, web_sources)
+            if summary:
+                answer_text += "\n\n" + summary
             deepseek_answer = answer_text
             form_values["deepseek_answer"] = deepseek_answer
-            if extra_context:
-                answer = extra_context + "\n\nAI助手：" + answer_text
-            else:
-                answer = answer_text
+            answer = answer_text
 
             if use_memory and deepseek_answer and memory_file_path:
                 try:

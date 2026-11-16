@@ -140,6 +140,7 @@
         $('current_session_title').textContent=redact(session.title);
         $('session_meta').textContent=session.messages.length ? '共 '+session.messages.length+' 条消息 · '+new Date(session.updatedAt).toLocaleString('zh-CN',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'}) : '你的本地 AI 工作台';
         $('ui_session_id').value=session.id;
+        window.DeepSeekUI?.contextChanged();
         messages.replaceChildren();
         if(!session.messages.length) {
             const welcome=document.createElement('div');welcome.className='welcome';
@@ -229,6 +230,7 @@
     }
     function validateSubmission(button) {
         const action=button?.name||'chat';
+        if(!window.DeepSeekUI.canSubmit(action))return false;
         const required=action==='send_image' ? [form.elements.namedItem('ark_model').value === 'nano-banana-2-1' ? 'pollo_key' : form.elements.namedItem('ark_model').value === 'grok-imagine-image-2.0' ? 'xai_key' : 'ark_key','image_prompt'] :
             action==='send_video' ? [form.elements.namedItem('video_model').value.startsWith('grok-imagine-') ? 'xai_key' : 'pollo_key'] :
             ['voice_upload','check_voice_status'].includes(action) ? ['doubao_token','doubao_appid','voice_speaker_id'] :
@@ -281,6 +283,7 @@
             store.append(sessionId, {id:requestId+"-ai",role:"ai",text,ts:Date.now(),
                 images:list("media_images_raw"),videos:list("media_videos_raw"),audioUrl:value("tts_audio_raw")});
             store.markHandled(requestId);
+            window.DeepSeekUI.handleResponse(source);
             $("diagnostics_raw").value = redact(value("answer_raw"));
             $("raw_output_details").hidden = !value("answer_raw");
             if (dialog.open) dialog.close();
@@ -299,7 +302,7 @@
         if(!validateSubmission(button)){event.preventDefault();return;}
         if(button.name==='clear_memory'&&!window.confirm('清空 '+form.elements.namedItem('memory_path').value+' 下的后端 memory.txt？此操作不影响浏览器会话，但会删除共享本地记忆。')){event.preventDefault();return;}
         const requestId=window.LingsiUid();$('ui_request_id').value=requestId;$('ui_session_id').value=store.current().id;
-        if(!button.name)store.append(store.current().id,{id:requestId+'-user',role:'user',text:redact($('chat_query').value.trim()),ts:Date.now()});
+        if(!button.name)store.append(store.current().id,{id:requestId+'-user',role:'user',text:redact($('chat_query').value.trim()+window.DeepSeekUI.summary()),ts:Date.now()});
         if(['send_image','send_video'].includes(button.name)) {
             const prompt=form.elements.namedItem(button.name==='send_image'?'image_prompt':'video_prompt').value.trim();
             store.append(store.current().id,{id:requestId+'-user',role:'user',text:(button.name==='send_image'?'图片创作':'视频创作')+(prompt?'：'+redact(prompt):'（参考图片）'),ts:Date.now()});
@@ -343,7 +346,6 @@
     $('tb_files').addEventListener('click',event=>showTool($('section_files'),event.currentTarget));
     $('persona_settings').addEventListener('click',()=>openSettings('local'));
     $('files_settings').addEventListener('click',()=>openSettings('local'));
-    $('attachment_btn').addEventListener('click',()=>{showTool($('section_image'),$('tb_image'));$('img2img_file').click();});
     $('settings_open').addEventListener('click',()=>openSettings());
     $('settings_close').addEventListener('click',cancelSettings);$('settings_cancel').addEventListener('click',cancelSettings);
     $('settings_save').addEventListener('click',saveSettings);
@@ -369,6 +371,7 @@
     window.addEventListener('resize',()=>{if(window.innerWidth>=1200)closeDrawers();});
     window.LingsiUI={renderChat,showTool,store};
     restoreSafeSettings();ingestResponse();
+    window.DeepSeekUI.init({store,toast});
     // Raw diagnostics are escaped by Jinja and additionally redact active secrets.
     $('diagnostics_raw').value=redact($('diagnostics_raw').value);
     updateToolStates();renderChat();

@@ -35,7 +35,9 @@ python main.py
 | 功能 | 当前实现 |
 |---|---|
 | 智能问答 | 通过 LangChain 调用 DeepSeek，当前配置模型为 `deepseek-flash` |
-| 联网检索 | 使用秘塔搜索和网页读取接口；问题包含 URL 时优先读取网页，否则搜索后读取结果正文 |
+| 联网检索 | 联网开关开启时，Agent 使用 DeepSeek Search/Fetch 工具搜索和阅读公开网页，限制正文长度并保留来源 |
+| 云端文件管理 | Agent 可列出（游标分页）、查询 DeepSeek 文件元信息，删除须通过前端弹窗确认 |
+| API 余额 | 设置 → API 配置中查询 DeepSeek CNY 总余额，显示两位小数 |
 | 角色设定 | 上传文本文件，将角色内容加入模型输入 |
 | 本地记忆 | 读取、追加和清空指定目录下的 `memory.txt`；不同浏览器会话共享该文件 |
 | 本地文件工具 | 使用 LangChain FileManagementToolkit，并提供运行本地可执行文件、PowerShell 脚本的工具 |
@@ -44,6 +46,20 @@ python main.py
 | TTS | 将模型回复通过豆包语音接口合成为 MP3，保存本地并提供播放 |
 
 本地文件工具以配置目录限制目标路径，程序和脚本通过本机进程执行；它们仍具有当前进程的系统权限，不属于隔离执行环境。当前没有本地模型推理、向量知识库或模型训练流程。
+
+## Chat 图片附件与 DeepSeek 云端文件
+
+Chat 输入栏的附件按钮用于上传 DeepSeek 对话图片；图片生成模块仍使用自己的参考图入口。支持 JPEG、PNG、GIF、WebP，文件实际内容由后端校验；PDF、DOCX 等文件不属于当前 DeepSeek Files API 的图片支持范围。原有角色文件上传独立保留。
+
+- 单文件最大 64 MiB；每次对话最多 600 张、合计 200 MiB。图片最长边为 8192 像素，15 张及以上时为 4096 像素。
+- 前端显示传至本地服务的进度、服务端上传状态及错误；后端以 `purpose=user_data` 调用 `/files`，取得 `file_id` 后以官方 `file` 内容块加入原有 Agent 的 user 消息。
+- 附件可在当前页面按会话切换和恢复；当前会话的引用会随普通 POST 回填。页面重新打开后不保证恢复其他会话的附件选择，云端文件仍可通过 Agent 查询。
+- “移除”只取消对话引用，不删除云端文件。上传不设置自动过期时间，文件会保留在 DeepSeek 账号中，直至通过删除确认流程处理。
+- 可在 Chat 中要求“列出 DeepSeek 云端文件”“查询 file-api-… 的信息”或“申请删除 file-api-…”。云端工具与本地文件工具分开，列表显示文件名、ID、大小、创建时间、状态和下一页游标。
+- 删除工具只创建待确认申请。弹窗展示文件名、ID 和不可撤销提示；独立确认接口绑定浏览器身份、会话、API Key 指纹、具体文件和一次性令牌，有效期 5 分钟。取消、过期、伪造或重复确认不会执行删除。删除请求遇到网络异常时需先查询实际状态，再重新申请。
+- 附件授权记录和待确认状态存放在当前后端进程内；服务重启会使这些状态失效，需要重新上传或重新申请确认。此实现面向当前单进程本机部署。
+
+余额、上传和删除接口均由后端访问 DeepSeek，复用现有 Key；新增接口使用页面令牌及同源校验，响应不返回密钥。联网开关关闭时，不向 Agent 提供搜索和抓取工具；开启时由 Agent 选择工具，单轮最多 6 次联网调用、合计约 18,000 字符工具资料预算。外部网页内容作为不可信工具数据处理，不写入系统消息；URL 拒绝认证信息、内网目标和非常用端口。
 
 ## 图片生成
 
@@ -105,7 +121,7 @@ xAI 根据是否提供图片，分别调用图片生成或图片编辑接口。�
 
 ## 设置与本地保存
 
-在“设置”中填写所用功能对应的凭据：DeepSeek、秘塔、Seedream 图片服务、Pollo 图片/视频平台、xAI（Grok），以及豆包语音所需的 API Key、AppID、Token 等。图片和视频生成不要求同时填写 DeepSeek Key。
+在“设置”中填写所用功能对应的凭据：DeepSeek、Seedream 图片服务、Pollo 图片/视频平台、xAI（Grok），以及豆包语音所需的 API Key、AppID、Token 等。图片和视频生成不要求同时填写 DeepSeek Key。
 
 设置支持保存、取消及密码显示/隐藏。密钥不写入浏览器 `localStorage` 或会话记录；当前页面和普通 POST 表单回填会保留密钥，重新打开页面或直接 GET 加载首页后需重新填写。设置保存接口不将凭据持久化到服务器配置文件。
 
@@ -126,11 +142,13 @@ xAI 根据是否提供图片，分别调用图片生成或图片编辑接口。�
 ```text
 pylangchain/
 ├── main.py                    # Flask 入口、Agent、模型接口、媒体保存与访问
+├── deepseek_extensions.py     # DeepSeek REST、Chat 文件引用、云端工具与删除确认
 ├── main.html                  # Jinja2 工作台模板、动态参数和语音输入逻辑
 ├── static/
 │   ├── css/workbench.css      # 布局、主题与响应式样式
 │   └── js/
 │       ├── conversations.js   # 浏览器会话数据与持久化
+│       ├── deepseek.js        # 余额、Chat 附件上传与云端删除确认交互
 │       └── workbench.js       # 工作台交互、设置和结果展示
 ├── pollo_video_pricing.json   # 当前平台模型的估价快照
 ├── Pollo视频价格表.md          # 完整视频定价采集记录
@@ -151,6 +169,9 @@ pylangchain/
 
 ## 官方资料
 
+- [DeepSeek 余额查询](https://api-docs.deepseek.com/zh-cn/api/get-user-balance)
+- [DeepSeek Files API](https://api-docs.deepseek.com/zh-cn/guides/files_api/)
+- [DeepSeek 搜索与抓取](https://api-docs.deepseek.com/zh-cn/guides/search/)
 - [Nano Banana 2.1](https://docs.pollo.ai/google/nano-banana-2-1)
 - [xAI Imagine 图片与视频接口](https://docs.x.ai/developers/model-capabilities/imagine)
 - [Pollo 2.5](https://docs.pollo.ai/pollo-ai/pollo-v2-5)

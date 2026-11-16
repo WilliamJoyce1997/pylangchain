@@ -111,3 +111,12 @@ input[type=checkbox] {accent-color:var(--primary);} select {text-overflow:ellips
  .settings-fields input,.settings-fields textarea,.settings-fields select {font-size:16px;}.settings-dialog {width:calc(100vw - 20px);max-height:calc(100dvh - 20px);}
 }
 @media(prefers-reduced-motion:reduce) { *,*::before,*::after {scroll-behavior:auto!important;transition:none!important;} }
+/* DeepSeek controls reuse the workbench palette and dialog components. */
+.deepseek-balance {display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 15px;font-size:12px;}
+.deepseek-balance span {color:var(--muted);overflow-wrap:anywhere;}
+.chat-attachments {max-height:130px;overflow:auto;}
+.chat-attachment {display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 10px;margin-bottom:7px;background:var(--primary-soft);border:1px solid var(--line);border-radius:9px;font-size:11px;}
+.chat-attachment span {flex:1;min-width:0;overflow-wrap:anywhere;}
+.chat-attachment button {padding:5px 8px;font-size:11px;}
+.chat-attachment progress {width:75px;max-width:100%;}
+#cloud_delete_details {white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px;line-height:1.8;}
