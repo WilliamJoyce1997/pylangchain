@@ -6,18 +6,25 @@ Web 服务、聊天记录和生成文件在本机使用或保存；模型问答�
 
 ## 启动项目
 
-项目当前主要面向 Windows。建议使用独立的 Python 或 Conda 环境，并在项目目录执行：
+此版本在 Windows x64、CPython 3.12 上验证。当前用户可以在任意目录用 `py -3.12 --version` 检查已安装的 Python 3.12。已配置 `.venv` 的副本可直接运行启动命令。重新搭建时，先安装 [Python.org 的 64 位 Python 3.12.10 安装包](https://www.python.org/downloads/release/python-31210/)，并根据实际安装位置调整解释器路径。
 
 ```powershell
-python -m pip install -r requirements.txt
-python main.py
+Set-Location -LiteralPath 'D:\Projects\pylangchain-py312'
+& "$env:LOCALAPPDATA\Programs\Python\Python312\python.exe" -m venv .venv
+& '.\.venv\Scripts\python.exe' -m pip install --only-binary=:all: --require-hashes -r requirements.txt
+& '.\.venv\Scripts\python.exe' -m pip check
+& '.\.venv\Scripts\python.exe' -B main.py
 ```
 
-访问 [http://127.0.0.1:5000](http://127.0.0.1:5000)。当前启动配置使用 Flask 开发服务器和 `debug=True`，仅监听本机地址；开发重载进程启动时会尝试自动打开浏览器。
+打开 [http://127.0.0.1:5000](http://127.0.0.1:5000)。`main.py` 会尝试自动打开浏览器。Flask 开发服务器仅监听本机，调试器及热重载默认关闭。同一端口只运行一个版本。
 
-实际后端入口是 `main.py`，不是 `app.py` 或旧文件名 `PythonLangChainAI-MOD6.py`。
+希望同时验证两个版本时，可用下面的命令将升级版启动到独立端口。浏览器按来源隔离 `localStorage`，更换端口会显示独立的会话列表。使用原浏览器配置和原地址可以继续读取原历史。
 
-`requirements.txt` 包含开发环境导出的依赖和部分指向特定机器构建目录的 `file:///` 引用。更换机器时，安装可能需要调整这些引用；其中列出的包并不都已被业务代码使用。
+```powershell
+& '.\.venv\Scripts\python.exe' -B -m flask --app main run --host 127.0.0.1 --port 5001
+```
+
+`requirements.in` 列出直接依赖，`requirements.txt` 锁定 Windows x64、Python 3.12 的已解析版本和包哈希。离线回归测试使用临时数据与 Mock API，命令为 `& '.\.venv\Scripts\python.exe' -B -m unittest discover -s tests -v`。版本差异与验收结果见 [Python 3.12 升级记录](UPGRADE-PY312.md)。
 
 ## 工作台与会话
 
@@ -34,7 +41,7 @@ python main.py
 
 | 功能 | 当前实现 |
 |---|---|
-| 智能问答 | 通过 LangChain 调用 DeepSeek，当前配置模型为 `deepseek-flash` |
+| 智能问答 | 通过 LangChain 1.x `create_agent` 和原生函数调用连接 DeepSeek，当前配置模型为 `deepseek-flash` |
 | 联网检索 | 联网开关开启时，Agent 使用 DeepSeek Search/Fetch 工具搜索和阅读公开网页，限制正文长度并保留来源 |
 | 云端文件管理 | Agent 可列出（游标分页）、查询 DeepSeek 文件元信息，删除须通过前端弹窗确认 |
 | API 余额 | 设置 → API 配置中查询 DeepSeek CNY 总余额，显示两位小数 |
@@ -135,6 +142,8 @@ xAI 根据是否提供图片，分别调用图片生成或图片编辑接口。�
 | 本地记忆 | 指定目录中的 `memory.txt`，默认 `C:\Memory\memory.txt` |
 | 文件工具根目录 | 默认 `C:\Script&File`，可在设置中修改 |
 
+项目目录复制不会迁移浏览器数据或项目目录外的文件。两个项目若选择同一记忆或媒体路径，仍读写同一外部目录。
+
 浏览器仅记录媒体地址，不存储图片、视频或音频文件本体。文件被移动、地址过期，或服务重启导致媒体目录白名单丢失时，旧会话中的媒体可能无法访问。
 
 ## 项目结构
@@ -153,13 +162,16 @@ pylangchain/
 ├── pollo_video_pricing.json   # 当前平台模型的估价快照
 ├── Pollo视频价格表.md          # 完整视频定价采集记录
 ├── UI升级验收说明.md           # UI 升级时的验收记录，部分名称沿用当时版本
-├── requirements.txt           # Python 依赖清单
+├── requirements.in            # Python 直接依赖
+├── requirements.txt           # Windows x64 / Python 3.12 依赖锁定文件（带哈希）
+├── tests/test_migration.py     # 离线迁移回归测试
+├── UPGRADE-PY312.md            # 升级记录与验收
 └── README.md
 ```
 
 ## 技术栈与当前边界
 
-- 后端：Python、Flask、Jinja2、Requests、LangChain、langchain-deepseek。
+- 后端：Python 3.12、Flask、Jinja2、Requests、Pillow、Pydantic、LangChain 1.x、LangGraph 和 langchain-deepseek。
 - 前端：原生 HTML、CSS、JavaScript、SVG、Fetch、FormData、DataTransfer 和浏览器 Web Speech API；没有 React/Vue 或前端构建流程。
 - 存储：浏览器 localStorage、本地文本/JSON 文件和媒体文件；未接入业务数据库。
 - 当前没有用户登录、角色权限、流式回复、后台任务队列、向量检索或生产部署配置。

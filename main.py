@@ -7,8 +7,11 @@ import os, sys, subprocess
 import uuid
 import urllib.parse
 from langchain_community.agent_toolkits.file_management.toolkit import FileManagementToolkit
-from langchain.agents import AgentType, initialize_agent
-from langchain.tools import Tool
+from langchain.agents import create_agent
+from langchain.agents.middleware import after_model
+from langchain.messages import AIMessage
+from langchain_core.tools import StructuredTool
+from langgraph.errors import GraphRecursionError
 
 import base64
 import time
@@ -32,21 +35,25 @@ def extract_urls(text, max_urls=5):
 def make_safe_path(base_dir: str, path: str) -> str:
     if not path:
         raise ValueError("缺少要访问的路径")
-    base_abs = os.path.abspath(os.path.expanduser(base_dir))
-    target = os.path.abspath(os.path.expanduser(path))
+    root = os.path.realpath(os.path.expanduser(base_dir))
+    target = os.path.realpath(os.path.join(root, os.path.expanduser(path)))
     try:
-        common = os.path.commonpath([base_abs, target])
+        inside = os.path.normcase(os.path.commonpath([root, target])) == os.path.normcase(root)
     except ValueError:
-        candidate = os.path.abspath(os.path.join(base_abs, path))
-        target = candidate
-        common = os.path.commonpath([base_abs, target])
-    if common != base_abs:
-        candidate = os.path.abspath(os.path.join(base_abs, path))
-        if os.path.commonpath([base_abs, candidate]) == base_abs:
-            target = candidate
-        else:
-            raise PermissionError(f"禁止访问不在 {base_abs} 下的路径: {target}")
+        inside = False
+    if not inside:
+        raise PermissionError(f"禁止访问不在 {root} 下的路径: {target}")
     return target
+
+
+@after_model
+def one_tool_per_step(state, runtime):
+    """Keep the previous Agent's one-action steps, including stop-on-delete."""
+    message = state["messages"][-1]
+    if isinstance(message, AIMessage) and len(message.tool_calls) > 1:
+        return {"messages": [message.model_copy(update={"tool_calls": message.tool_calls[:1], "invalid_tool_calls": []})]}
+    return None
+
 
 # Official per-model and per-generation-type schemas, shared with the template.
 POLLO_VIDEO_MODELS = {'viduq3-pro': {'label': 'Vidu Q3 Pro',
@@ -1291,8 +1298,9 @@ def index():
                 user_query = "请分析附件图片。"
                 form_values["query"] = user_query
             llm = ChatDeepSeek(model="deepseek-flash", api_key=deepseek_key, chat_file_ids=chat_ids)
-        except Exception as e:
-            answer = f"❌ 初始化 DeepSeek LLM 失败: {e}"
+        except ValueError as error:
+            detail = str(error) if isinstance(error, DeepSeekError) else "请检查密钥及附件参数"
+            answer = f"❌ 初始化 DeepSeek LLM 失败: {detail}"
             return render_template('main.html', answer=answer, **form_values)
 
         # default base_dir
@@ -1358,62 +1366,42 @@ def index():
                 except Exception as e:
                     return f"执行 .ps1 时出错: {e}"
 
-            run_exe_tool = Tool(
+            run_exe_tool = StructuredTool.from_function(
+                run_executable_tool,
                 name="run_executable",
-                func=run_executable_tool,
-                description=(
-                    "在 AI 可操作根目录内运行指定的可执行文件 (.exe 或 .bat 等)。"
-                    "参数为文件路径（相对或绝对），路径必须在已告知的根目录内。"
-                    "返回执行的 stdout 或错误信息。"
-                )
+                description="在配置根目录内运行 .exe、.bat、.cmd 或无扩展名文件。参数 path 是相对或绝对路径。",
             )
-            run_ps1_tool = Tool(
+            run_ps1_tool = StructuredTool.from_function(
+                run_powershell_tool,
                 name="run_powershell",
-                func=run_powershell_tool,
-                description=(
-                    "在 AI 可操作根目录内运行指定的 PowerShell 脚本 (.ps1)。"
-                    "参数为文件路径（相对或绝对），路径必须在已告知的根目录内。"
-                    "返回执行的 stdout 或错误信息。"
-                )
+                description="在配置根目录内运行 .ps1 脚本。参数 path 是相对或绝对路径。",
             )
             cloud_tools, cloud_pending, cloud_events, web_sources = make_deepseek_tools(
                 DeepSeekAPI(deepseek_key), deepseek_state, session["deepseek_owner"], ui_session_id, use_network)
             form_values["cloud_pending"] = cloud_pending
-            selected_tools = file_tools + [run_exe_tool, run_ps1_tool] + cloud_tools
-            if selected_tools:
-                agent_executor = initialize_agent(selected_tools, llm,
-                                                  agent=AgentType.STRUCTURED_CHAT_ZERO_SHOT_REACT_DESCRIPTION,
-                                                  verbose=False,
-                                                  agent_kwargs={"prefix": (AGENT_RULES + "\n" + system_prompt_input).replace("{", "{{").replace("}", "}}")})
-            else:
-                agent_executor = None
+            system_prompt = "\n".join(part for part in (AGENT_RULES, system_prompt_input) if part)
+            agent = create_agent(
+                model=llm,
+                tools=file_tools + [run_exe_tool, run_ps1_tool] + cloud_tools,
+                system_prompt=system_prompt,
+                middleware=[one_tool_per_step],
+            )
         except Exception as e:
             answer = f"❌ 初始化文件工具失败: {e}"
             return render_template('main.html', answer=answer, **form_values)
 
-        # construct system prompt
-        system_prompt = system_prompt_input
-        if persona_text:
-            system_prompt += "\n根据以下内容严格进行角色扮演：\n" + persona_text
-
-        # final input composition
-        final_input = ""
-        if memory_text:
-            final_input += memory_text + "\n\n"
-        if persona_text:
-            final_input += persona_text + "\n\n"
-        final_input += user_query
-
-        final_input = system_prompt + "\n\n" + final_input
-
-        # call agent or LLM
+        # Browser history stays local. Only the explicitly enabled memory and persona are sent.
+        persona_context = "根据以下内容进行角色扮演：\n" + persona_text if persona_text else ""
+        final_input = "\n\n".join(part for part in (memory_text, persona_context, user_query) if part)
         try:
-            if agent_executor:
-                answer_text = agent_executor.run(final_input)
-            else:
-                formatted = [("system", system_prompt), ("human", final_input)]
-                resp = llm.invoke([{"role": r, "content": c} for r, c in formatted])
-                answer_text = getattr(resp, "content", None) or getattr(resp, "text", None) or str(resp)
+            state = agent.invoke(
+                {"messages": [{"role": "user", "content": final_input}]},
+                config={"recursion_limit": 48, "max_concurrency": 1},
+            )
+            # A return_direct tool (the cloud deletion proposal) returns a ToolMessage.
+            answer_text = state["messages"][-1].text
+            if not answer_text:
+                answer_text = "⚠️ DeepSeek 未返回可显示的文本。"
 
             summary = tool_summary(cloud_events, web_sources)
             if summary:
@@ -1487,9 +1475,11 @@ def index():
                 except Exception as e:
                     tb = traceback.format_exc()
                     answer = answer + f"\n\n❌ 语音生成出错: {e}\n\ntraceback:\n{tb}"
-        except Exception as e:
-            tb = traceback.format_exc()
-            answer = f"❌ 处理请求时出错: {e}\n\ntraceback:\n{tb}"
+        except GraphRecursionError:
+            answer = "⚠️ 本次对话已达到工具调用上限，请缩小请求范围后重试。"
+        except Exception:
+            # Provider exceptions can contain request material. Keep them out of the response.
+            answer = "❌ DeepSeek 对话请求失败，请检查密钥、网络及服务状态后重试。"
 
     return render_template('main.html', answer=answer, **form_values)
 
@@ -1532,12 +1522,8 @@ def tts_audio(filename):
 
 
 if __name__ == "__main__":
-    # 只在 reloader 的“子进程”中自动打开浏览器，避免 debug 模式下重复打开两次窗口。
     import webbrowser
     from threading import Timer
 
-    if os.environ.get("WERKZEUG_RUN_MAIN") == "true":
-        Timer(1, lambda: webbrowser.open('http://127.0.0.1:5000')).start()
-
-    # 开发阶段 debug=True；若不想自动打开浏览器则把 debug=False
-    app.run(host='127.0.0.1', port=5000, debug=True)
+    Timer(1, lambda: webbrowser.open("http://127.0.0.1:5000")).start()
+    app.run(host="127.0.0.1", port=5000, debug=False)
